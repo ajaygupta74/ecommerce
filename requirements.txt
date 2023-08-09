@@ -1,6 +1,6 @@
 asgiref==3.7.2
 Babel==2.12.1
-Django==3.2.7
+Django==3.2.20
 django-ckeditor==5.9.0
 django-js-asset==2.1.0
 django-modeltranslation==0.17.2
