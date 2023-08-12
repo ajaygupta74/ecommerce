@@ -1,0 +1,26 @@
+.navbar-toggler-icon {
+    background-color: #333;
+    width: 25px;
+    height: 3px;
+}
+
+@media (max-width: 991.98px) {
+    .navbar-toggler {
+        border: none;
+        background-color: transparent;
+    }
+}
+#category_list{
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+    background-color: lightgray;
+}
+.category_item_link {
+    color: #303438;
+    text-decoration: none;
+}
+.category_item_link:hover{
+    color: blue;
+}
+.category_list_item {
+    list-style: none;
+}

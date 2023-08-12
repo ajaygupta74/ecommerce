@@ -146,3 +146,9 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'Basic',
     },
 }
+
+AUTHENTICATION_BACKENDS = [
+    'users.backends.EmailAuthentication',
+    'users.backends.PhoneAuthentication',
+]
+AUTH_USER_MODEL = 'users.User'
