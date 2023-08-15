@@ -5,6 +5,7 @@ from services.models import (
     ProductCategory,
     Product,
     ProductAttribute,
+    ProductCategoryFaq,
     ProductFaq,
     ProductImage,
     ProductReview
@@ -20,6 +21,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 class ProductCategoryAdmin(admin.ModelAdmin):
     list_display = ['title', 'priority', 'is_active']
+    search_fields = ('title', )
 
 
 class ProductAttributeAdmin(admin.ModelAdmin):
@@ -34,6 +36,11 @@ class ProductFaqAdmin(admin.ModelAdmin):
     autocomplete_fields = ('product', )
 
 
+class ProductCategoryFaqAdmin(admin.ModelAdmin):
+    list_display = ['product_category', 'question', 'answer']
+    autocomplete_fields = ('product_category', )
+
+
 class ProductImageAdmin(admin.ModelAdmin):
     list_display = ['product', 'image', 'is_approved']
     autocomplete_fields = ('product', )
@@ -41,8 +48,8 @@ class ProductImageAdmin(admin.ModelAdmin):
 
 class ProductReviewAdmin(admin.ModelAdmin):
     list_display = [
-        'product', 'user_name', 'ratings', 'review_likes', 'review_dislikes',
-        'reply_likes', 'reply_dislikes']
+        'product', 'first_name', 'last_name', 'ratings', 'review_likes',
+        'review_dislikes', 'reply_likes', 'reply_dislikes']
     autocomplete_fields = ('product', )
 
 
@@ -50,5 +57,6 @@ admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductCategory, ProductCategoryAdmin)
 admin.site.register(ProductAttribute, ProductAttributeAdmin)
 admin.site.register(ProductFaq, ProductFaqAdmin)
+admin.site.register(ProductCategoryFaq, ProductCategoryFaqAdmin)
 admin.site.register(ProductImage, ProductImageAdmin)
 admin.site.register(ProductReview, ProductReviewAdmin)

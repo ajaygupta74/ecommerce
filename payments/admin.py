@@ -13,6 +13,7 @@ class OrderAdmin(admin.ModelAdmin):
     )
     search_fields = ('user__email', 'user__phone_number', 'product__title')
     autocomplete_fields = ('user', 'product')
+    readonly_fields = ('slug', )
 
 
 admin.site.register(Order, OrderAdmin)

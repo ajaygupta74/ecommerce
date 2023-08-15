@@ -19,7 +19,7 @@
     text-decoration: none;
 }
 .category_item_link:hover{
-    color: blue;
+    color: black;
 }
 .category_list_item {
     list-style: none;
@@ -30,13 +30,13 @@
     display: flex;
     justify-content: space-around;
     align-items: stretch;
-    /* padding: 20px 0px; */
-    /* border: 1px solid grey; */
     border-radius: 10px;
 }
+
 .product_content{
-    border: 1px solid rgb(194, 192, 192);
+    border: 1px solid #c2c0c0;
     border-radius: 0px 6px 6px 6px;
+    background-color: #fff2f2;
     padding: 10px 10px;
 }
 @media (max-width:1198px) {
@@ -47,4 +47,65 @@
         justify-content: flex-start !important;
     }
     
+}
+
+footer{
+    background-color: #303438;
+    color: white;
+    text-align: center;
+}
+
+.faq-section {
+    background-color: #f8f8f8;
+}
+
+.faq-section #accordion {
+    margin-top: 20px;
+}
+
+.faq-section .card {
+    border-color: #C3C3C3;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background: #f8f8f8;
+}
+
+.faq-section .card button {
+    color: #212529;
+    text-decoration: none;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    text-transform: none;
+    letter-spacing: unset;
+    text-align: left;
+    background: #f8f8f8;
+}
+
+.faq-section .card .card-header {
+    background: #f8f8f8;
+    border-bottom: 0px;
+    padding-left: 0;
+}
+
+.faq-section .card .card-header h5 {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.faq-section .card .card-body {
+    color: #343a40;
+    padding-top: 0px;
+}
+
+.reviewer_detail{
+    display:flex;
+}
+.review_user_name {
+    flex: 1;
+}
+.reviewer_name {
+    flex: 6;
+}
+.review_time {
+    flex: 4
 }

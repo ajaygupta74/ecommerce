@@ -2,116 +2,20 @@
 
 {% block main_content %}
 
-<section class="section-padding-home pt-0">
-  <div class="container my-5">
-    <div class="row mb-3">
-      <!-- for loop for product list -->
-        <div class="col-sm-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 mb-4">
-            <div class="product_card">
-              <div class="product_image">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTim3lLOH1YXW2qgM9-4bgCv_J52nl3a4bIJw&usqp=CAU" class="img-fluid rounded-start" alt="...">
-              </div>
-                <div class="product_content">
-                    <h5 class="product_title">Product title</h5>
-                    <p class="product_desc mb-2">This is a wider card with supporting text below as a natu</p>
-                    <p class="product_price mb-0">Starting From - Rs.300 <del>Rs.500</del></p>
-                    <p class="product_purchase"><small class="text-muted">Total Purchased - 23903</small></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 mb-4">
-            <div class="product_card">
-              <div class="product_image">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTim3lLOH1YXW2qgM9-4bgCv_J52nl3a4bIJw&usqp=CAU" class="img-fluid rounded-start" alt="...">
-              </div>
-                <div class="product_content">
-                    <h5 class="product_title">Product title</h5>
-                    <p class="product_desc mb-2">This is a wider card with supporting text below as a natu</p>
-                    <p class="product_price mb-0">Starting From - Rs.300 <del>Rs.500</del></p>
-                    <p class="product_purchase"><small class="text-muted">Total Purchased - 23903</small></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 mb-4">
-            <div class="product_card">
-              <div class="product_image">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTim3lLOH1YXW2qgM9-4bgCv_J52nl3a4bIJw&usqp=CAU" class="img-fluid rounded-start" alt="...">
-              </div>
-                <div class="product_content">
-                    <h5 class="product_title">Product title</h5>
-                    <p class="product_desc mb-2">This is a wider card with supporting text below as a natu</p>
-                    <p class="product_price mb-0">Starting From - Rs.300 <del>Rs.500</del></p>
-                    <p class="product_purchase"><small class="text-muted">Total Purchased - 23903</small></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 mb-4">
-            <div class="product_card">
-              <div class="product_image">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTim3lLOH1YXW2qgM9-4bgCv_J52nl3a4bIJw&usqp=CAU" class="img-fluid rounded-start" alt="...">
-              </div>
-                <div class="product_content">
-                    <h5 class="product_title">Product title</h5>
-                    <p class="product_desc mb-2">This is a wider card with supporting text below as a natu</p>
-                    <p class="product_price mb-0">Starting From - Rs.300 <del>Rs.500</del></p>
-                    <p class="product_purchase"><small class="text-muted">Total Purchased - 23903</small></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 mb-4">
-            <div class="product_card">
-              <div class="product_image">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTim3lLOH1YXW2qgM9-4bgCv_J52nl3a4bIJw&usqp=CAU" class="img-fluid rounded-start" alt="...">
-              </div>
-                <div class="product_content">
-                    <h5 class="product_title">Product title</h5>
-                    <p class="product_desc mb-2">This is a wider card with supporting text below as a natu</p>
-                    <p class="product_price mb-0">Starting From - Rs.300 <del>Rs.500</del></p>
-                    <p class="product_purchase"><small class="text-muted">Total Purchased - 23903</small></p>
-                </div>
-            </div>
-        </div>
-      <!-- end for here-->
-    </div>
-  </div>
 
-    {% comment %} {% if page_list.paginator.num_pages > 1 %}
-    <div class="row">
-        <div class="col-md-12">
-            <ul class="pagination">
-                <li class="prev">
-                    {% if page_list.has_previous %}
-                        <a  href="?page={{ page_list.previous_page_number }}">
-                        {% else %}
-                            <a href="#">
-                            {% endif %}
-                            <i class="fa fa-angle-double-left" aria-hidden="true"></i> Prev</a>
-                    </li>
-                    {% if page_list.has_previous %}
-                        <li>
-                            <a href="?page={{ page_list.previous_page_number }}">{{ page_list.previous_page_number }}</a>
-                        </li>
-                    {% endif %}
-                    <li>
-                        <a href="?page={{ page_list.number }}" class="active">{{ page_list.number }}</a>
-                    </li>
-                    {% if page_list.has_next %}
-                        <li>
-                            <a class="nextpageclass" >{{ page_list.next_page_number }}</a>
-                        </li>
-                    {% endif %}
-                    <li class="next">
-                        {% if page_list.has_next %}
-                            <a class="nextpageclass" >
-                            {% else %}
-                                <a class="nextpageclass" href="#">
-                                {% endif %}
-                            Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    {% endif %} {% endcomment %}
+<section class="section-padding-home pt-0">
+<div id="banner_content" class="container-expand-lg mt-0" style="background-color: beige;">
+	<div class="container py-3">
+		<h4 class="my-3">{% if active_category %}{{active_category.title}}{% else %}Recommended Services{% endif %}</h4>
+		{% if active_category %}{{active_category.web_description|safe}}
+		{% else %}
+		In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form
+		of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placehold
+		er before final copy is a
+		{% endif %}
+	</div>
+</div>
+{% include 'product_list.html' %}
+{% include 'faqs.html' %}
 </section>
 {% endblock main_content %}

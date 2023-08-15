@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+<div class="container my-5">
+    <div class="card mb-3 border-0">
+    <div class="card-body p-0">
+        <h5 class="card-title">{{user.phone_number}}</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text"><small class="text-muted">Member since - {{user.date_joined}}</small></p>
+    </div>
+</div>
+
+{% include 'order_list.html' %}
+
+{% if recommended_products %}
+<div class="container my-5">
+    <h4 class="my-4">Recommended Products</h4>
+    <div class="row mb-3">
+    {% for product in recommended_products %}
+    <div class="col-sm-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 mb-4">
+        <a href="{% url 'product_detail' product.category.slug product.slug %}" class="product_item_link text-decoration-none text-dark">
+            <div class="product_card">
+            <div class="product_image col-3">
+                <img src="{{product.icon.url}}" class="img-fluid rounded-start" alt="...">
+            </div>
+                <div class="product_content col-9">
+                    <h5 class="product_title">{{product.title}}</h5>
+                    <p class="product_desc mb-2">{{product.web_description|safe|truncatewords:15}}</p>
+                    <p class="product_price mb-0">Price - Rs.{{product.min_price}} <del>Rs.{{product.max_price}}</del></p>
+                    <p class="product_purchase"><small class="text-muted">Likes - {{product.likes}}<br>Dislikes - {{product.dislikes}}</small></p>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+
+</div>
+{% endblock main_content %}

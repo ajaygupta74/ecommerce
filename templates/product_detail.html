@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main_content %}
+
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="container my-3">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'category_detail' product.category.slug  %}">{{product.category.title}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{product.title}}</li>
+  </ol>
+</nav>
+
+<div class="container mb-3">
+  <div class="product_card">
+    <div class="product_image col-3 pt-4">
+      <img src="{{product.icon.url}}" class="img-fluid rounded-start" alt="...">
+    </div>
+      <div class="product_detail_content col-9 border-0 p-4">
+          <h3 class="product_title">{{product.title}}</h3>
+          <p class="product_price mb-0">Price - Rs.{{product.min_price}} <del>Rs.{{product.max_price}}</del></p>
+          <p class="product_purchase"><small class="text-muted">Likes - {{product.likes}}<br>Dislikes - {{product.dislikes}}</small></p>
+          <div>
+          Choose :
+            <div class="container mt-2">
+            {% for attribute in product_attributes %}
+            <input type="radio" class="btn-check" name="attribute" id="{{attribute.title}}" autocomplete="off" checked>
+            <label class="btn btn-outline-secondary m-1" for="{{attribute.title}}">{{attribute.title}}</label> 
+            {% endfor %}
+            </div>
+          </div>
+          <p class="product_price mt-4 mb-2">Total Price - Rs.{{product.min_price}}</p>
+          <button type="button" class="btn btn-success mb-4">Proceed to Payment</button>
+          <h5 class="mb-2">Description</h5>
+          <p class="product_desc">{{product.web_description|safe}}</p>
+
+          {% if product_reviews %}
+          <div>
+            <h5 class="mt-4">Reviews</h5>
+            <div class="review-rating mb-3">
+              <span class="rating-star">
+                <i class="fa fa-star" style="color:#FDBF3E;"></i>
+              </span> <strong> {{ product.star_ratings }} out of 5</strong>
+              <span class="number_customer_rating">({{ product.total_review }} customer ratings)</span>
+            </div>
+              {% for review in product_reviews %}
+              <div class="card">
+                <div class="card-body">
+                  <strong class="card-title">{{review.first_name}} {{review.last_name}}</strong>
+                  <span class="card-subtitle ms-2 py-1 px-2 bg-warning">4.0</span><br>
+                  <span class="card-text text-secondary" style="font-size:0.9em;">14 aug, 2023</span>
+                  <p class="card-text mb-2 mt-1">{{review.review_msg}}</p>
+                  {% if review.reply_msg %}
+                    <div class="card-body p-2" style="background-color: #c2c0c0;">
+                      <span class="card-text text-secondary" style="font-size:0.9em;">Project 2 :</span>
+                      <p class="card-text mb-2 mt-1">{{review.review_msg}}</p>
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+              {% endfor %}
+          </div>
+          {% endif %}
+      </div>
+  </div>
+</div>
+{% endblock main_content %}
