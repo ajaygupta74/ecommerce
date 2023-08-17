@@ -1,8 +1,12 @@
 import logging
+from django.db.models import F, Min, Max
+from django.shortcuts import render
 from django.views import generic
+from project2 import messages
 
 from services.models import (
     Product,
+    Order,
     ProductAttribute,
     ProductCategory,
     ProductCategoryFaq,
@@ -97,9 +101,39 @@ class ProductDetailView(generic.DetailView):
             product=product).order_by('value')
         product_reviews = ProductReview.objects.filter(
             product=product).order_by('-review_time', '-reply_time')
+        min_price_product_attr = ProductAttribute.objects.filter(
+                product=product).order_by('offer_price').first()
         context.update({
             'product': product,
             'product_attributes': product_attributes,
-            'product_reviews': product_reviews
+            'product_reviews': product_reviews,
+            'starting_price': min_price_product_attr.offer_price
         })
         return context
+
+
+def order_detail(request, category_slug, product_slug):
+    template_name = 'order_detail.html'
+    category = ProductCategory.objects.filter(slug=category_slug).last()
+    product = Product.objects.filter(slug=product_slug).last()
+    attr_value = request.GET.get('value', '')
+    product_attribute = None
+    if attr_value:
+        product_attribute = ProductAttribute.objects.filter(
+            product=product, value=int(attr_value)).first()
+    defaults = {
+        'order_price': product_attribute.offer_price,
+        'description': 'order_initiated'}
+    order, created = Order.objects.update_or_create(
+        user=request.user,
+        product=product,
+        payment_done=False,
+        status=Order.Status.INITIATED,
+        defaults=defaults)
+    context = {
+        'product': product,
+        'category': category,
+        'order': order,
+        'input_instructions': messages.PURCHASE_INPUT_INSTRUCTIONS
+    }
+    return render(request, template_name, context)

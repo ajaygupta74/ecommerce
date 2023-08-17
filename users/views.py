@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from payments.models import Order
+from services.models import Order
 
 
 def user_detail(request):

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+<div class="container mt-5 mb-4">
+    <div class="col-sm-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 mb-4">
+        <div class="product_card">
+            <div class="product_image col-3">
+            <img src="{{product.icon.url}}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="product_content col-9">
+                <h5 class="product_title mb-1">{{product.title}}</h5>
+                <p class="card-text mb-1"><small class="text-muted">{{category.title}}</small></p>
+                <p class="card-text mb-1"><small class="text-muted">{{order.payment_json}}</small></p>
+                <p class="card-text mb-1"><small class="text-muted">{{category.title}}</small></p>
+                <p class="product_desc mb-2">rdfthyuijokplsdrftyghulrdehul{{product.web_description|safe|truncatewords:15}}</p>
+            </div>
+        </div>
+    </div>
+
+    <h5 class="card-title">Total : Rs.{{order.order_price}}</h5>
+</div>
+
+<div class="container mb-5">
+    <div class="card mb-4 border-0">
+        <h5 class="card-title">Personal Details -</h5>
+        <p class="card-text mb-1"><small class="text-muted">Name  : &nbsp;&nbsp;{{user.first_name}} {{user.last_name}}</small></p>
+        <p class="card-text mb-1"><small class="text-muted">Phone : &nbsp;&nbsp;{{user.phone_number}}</small></p>
+    </div>
+
+    <form class="row g-3">
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Enter your message</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1"
+            placeholder="{{input_instructions}}" rows="5" required></textarea>
+        </div> 
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Proceed to payment</button>
+        </div>
+    </form>
+</div>
+{% endblock main_content %}
