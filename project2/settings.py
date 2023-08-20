@@ -153,3 +153,4 @@ AUTHENTICATION_BACKENDS = [
     'users.backends.PhoneAuthentication',
 ]
 AUTH_USER_MODEL = 'users.User'
+LOGOUT_REDIRECT_URL = '/'

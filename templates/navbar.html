@@ -8,11 +8,11 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
         {% if user.is_authenticated %}
-        <li class="nav-item me-2"><a class="nav-link" href="{% url 'user_detail'%}">
-          {% if user.first_name%} {{user.first_name}} {% else %} Profile {% endif %}
-        </a></li>
+        <li class="nav-item me-2"><a class="nav-link" href="{% url 'user_detail'%}">{% if user.first_name%} {{user.first_name}} {% else %} Profile {% endif %}</a></li>
+        <li class="nav-item me-2"><a class="nav-link" href="{% url 'user_logout'%}">Logout</a></li>
         {% else %}
-        <li class="nav-item me-2"><a class="nav-link" href="#">Login</a></li>
+         <li class="nav-item me-2"><a href="" class="nav-link" data-bs-toggle="modal" data-bs-target="#signupmodal">Signup</a></li>
+          <li class="nav-item me-2"><a href="" class="nav-link" data-bs-toggle="modal" data-bs-target="#loginmodal">Login</a></li>
         {% endif %}
         <li class="nav-item"><a class="nav-link" href="#">Help</a></li>
       </ul>

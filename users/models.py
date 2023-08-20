@@ -39,6 +39,7 @@ class CustomUserManager(BaseUserManager):
 
 
 class User(AbstractUser):
+    username = None
     email = models.EmailField(unique=True)
     phone_number = PhoneNumberField(null=True, unique=True, blank=True)
     gender = models.BooleanField(null=True)

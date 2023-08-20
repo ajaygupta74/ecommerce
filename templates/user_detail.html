@@ -4,8 +4,9 @@
 <div class="container my-5">
     <div class="card mb-3 border-0">
     <div class="card-body p-0">
-        <h5 class="card-title">{{user.phone_number}}</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5>
+        <p class="card-text"><b>Phone :</b> {{user.phone_number}}<br><b>Email :</b> {{user.email}}<br>
+        This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
         <p class="card-text"><small class="text-muted">Member since - {{user.date_joined}}</small></p>
     </div>
 </div>

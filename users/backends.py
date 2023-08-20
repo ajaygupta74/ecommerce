@@ -1,10 +1,12 @@
 from users.models import User
+from django.db.models import Q
 
 
 class EmailAuthentication(object):
     def authenticate(self, request, username=None, password=None):
         try:
-            user = User.objects.get(email=username)
+            user = User.objects.get(
+                Q(email=username) | Q(phone_number=username))
             if user.check_password(password):
                 return user
             return None
