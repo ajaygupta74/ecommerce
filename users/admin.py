@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from users.models import User
+from users.models import User, UserQuery
 
 
 class CustomUserAdmin(UserAdmin):
@@ -27,4 +27,10 @@ class CustomUserAdmin(UserAdmin):
     )
 
 
+class UserQueryAdmin(admin.ModelAdmin):
+    list_display = ['fullname', 'email', 'phone_number', 'created_at']
+    list_filter = ('is_solved', )
+
+
 admin.site.register(User, CustomUserAdmin)
+admin.site.register(UserQuery, UserQueryAdmin)
