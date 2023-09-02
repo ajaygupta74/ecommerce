@@ -65,7 +65,7 @@ class Product(models.Model):
         related_name='products')
     sub_category = models.ForeignKey(
         ProductSubCategory, on_delete=models.CASCADE,
-        related_name='products')
+        related_name='products', null=True, blank=True)
     web_description = RichTextField(
         config_name='awesome_ckeditor', null=True, blank=True)
     priority = models.PositiveIntegerField(null=True, blank=True)
