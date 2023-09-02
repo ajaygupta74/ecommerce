@@ -33,6 +33,9 @@
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon3">Create password*&nbsp;&nbsp;</span>
           <input type="password" class="form-control" name="password1" id="password1" aria-describedby="basic-addon3" required>
+          <span class="input-group-text" id="password1_btn" style="cursor: pointer;" onclick="show_hide_password('password1')">
+            <img src={% static 'icons/eye-fill.svg' %}>
+          </span>
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon3">Confirm password*</span>
@@ -74,6 +77,9 @@
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon3">Password</span>
           <input type="password" class="form-control" name="password" id="password" aria-describedby="basic-addon3" required>
+          <span class="input-group-text" id="password_btn" style="cursor: pointer;" onclick="show_hide_password('password')">
+            <img src={% static 'icons/eye-fill.svg' %}>
+          </span>
         </div>
       </div>
       <div class="modal-footer">
@@ -87,6 +93,19 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+  function show_hide_password(element_id){
+    var element = document.getElementById(`${element_id}`);
+    var ele_btn = document.getElementById(`${element_id}_btn`);
+    if (element.type === "password") {
+      element.type = "text";
+      ele_btn.innerHTML = "<img src={% static 'icons/eye-slash-fill.svg' %}>"
+    } else { 
+      element.type = "password"; 
+      ele_btn.innerHTML = "<img src={% static 'icons/eye-fill.svg' %}>"
+      
+    }
+  }
+
   $(document).ready(function() {
     $('#signup_form').on('submit', function(event) {
       event.preventDefault();

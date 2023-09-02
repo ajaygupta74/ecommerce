@@ -44,15 +44,15 @@
               <span class="number_customer_rating">({{ product.total_review }} customer ratings)</span>
             </div>
               {% for review in product_reviews %}
-              <div class="card">
+              <div class="card mb-2">
                 <div class="card-body">
                   <strong class="card-title">{{review.first_name}} {{review.last_name}}</strong>
-                  <span class="card-subtitle ms-2 py-1 px-2 bg-warning">4.0</span><br>
-                  <span class="card-text text-secondary" style="font-size:0.9em;">14 aug, 2023</span>
+                  <span class="card-subtitle ms-2 py-1 px-2 bg-warning text-muted">{{review.ratings}} <img src="{% static 'icons/star-fill.svg' %}"></span><br>
+                  <span class="card-text text-secondary" style="font-size:0.9em;">{{review.review_time}}</span>
                   <p class="card-text mb-2 mt-1">{{review.review_msg}}</p>
                   {% if review.reply_msg %}
-                    <div class="card-body p-2" style="background-color: #c2c0c0;">
-                      <span class="card-text text-secondary" style="font-size:0.9em;">Project 2 :</span>
+                    <div class="card-body p-2" style="background-color: #edeaea;">
+                      <span class="card-text text-secondary" style="font-size:0.9em;">Growsmo - {{review.reply_time}}</span>
                       <p class="card-text mb-2 mt-1">{{review.review_msg}}</p>
                     </div>
                   {% endif %}

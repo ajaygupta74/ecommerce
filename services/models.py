@@ -28,6 +28,31 @@ class ProductCategory(models.Model):
         super(ProductCategory, self).save(*args, **kwargs)
 
 
+class ProductSubCategory(models.Model):
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True, null=True, blank=True)
+    category = models.ForeignKey(
+        ProductCategory, on_delete=models.CASCADE,
+        related_name='sub_category')
+    web_description = RichTextField(
+        config_name='awesome_ckeditor', null=True, blank=True)
+    priority = models.PositiveIntegerField(null=True, blank=True)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        if self.priority is None:
+            last_category = ProductSubCategory.objects.last()
+            self.priority = last_category.id + 1 if last_category else 1
+        if self.slug is None:
+            self.slug = slugify(self.title)
+        super(ProductSubCategory, self).save(*args, **kwargs)
+
+
 class Product(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, null=True, blank=True)
@@ -37,6 +62,9 @@ class Product(models.Model):
         upload_to='uploads/images/services/products/banners/', null=True)
     category = models.ForeignKey(
         ProductCategory, on_delete=models.CASCADE,
+        related_name='products')
+    sub_category = models.ForeignKey(
+        ProductSubCategory, on_delete=models.CASCADE,
         related_name='products')
     web_description = RichTextField(
         config_name='awesome_ckeditor', null=True, blank=True)

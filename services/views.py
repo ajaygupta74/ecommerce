@@ -10,7 +10,8 @@ from services.models import (
     ProductAttribute,
     ProductCategory,
     ProductCategoryFaq,
-    ProductReview
+    ProductReview,
+    ProductSubCategory
 )
 
 logger = logging.getLogger(__name__)
@@ -23,41 +24,46 @@ class HomeView(generic.TemplateView):
         context = super().get_context_data(**kwargs)
         faqs_list = {
             "first": {
-                "question": "What is the difference between Nalla neram and \
-                gowri Nalla neram?",
-                "answer": "The sole distinction between Nalla Neram and Gowri \
-                Nalla Neram is that they both employ different timings to \
-                determine good and poor times of the day."
+                "question": ("Is it safe to purchase services for"
+                             " various social media platforms?"),
+                "answer": ("Yes, our services prioritize security and"
+                           " authenticity, ensuring your profiles remain"
+                           " safe while you experience growth.")
             },
             "second": {
-                "question": "Which is best Nalla Neram or Gowri Nalla Neram?",
-                "answer": "Both Nalla Neram and Gowri Nalla Neram are equally \
-                good at evaluating the auspicious timings of the day."
+                "question": ("How long does it take to see results after"
+                             " purchasing these services?"),
+                "answer": ("You'll notice enhanced engagement and"
+                           " visibility within hours, with full delivery"
+                           " based on your chosen package.")
             },
             "third": {
-                "question": "Where is Nalla Neram generally followed?",
-                "answer": "The majority of south India adheres to Nalla \
-                neram. The term 'Nalla neram,' which signifies an excellent \
-                or auspicious period, is of Tamil origin."
+                "question": ("Can I target specific demographics or"
+                             " regions for my purchased services?"),
+                "answer": ("Absolutely. We provide targeting options"
+                           " that let you customize your audience to"
+                           " match your goals.")
             },
             "fourth": {
-                "question": "In how many time slots is the day divided in \
-                Tamil astrology?",
-                "answer": "The day is divided into eight equal parts, which \
-                are either auspicious or inauspicious."
+                "question": ("Are the followers, likes, and connections"
+                             " real people or bots?"),
+                "answer": ("We specialize in delivering real, active profiles"
+                           " to maintain authenticity and engagement.")
             },
             "fifth": {
-                "question": "Are Nalla Neram's timings accurate?",
-                "answer": "Nalla neram timings are based on Tamil astrology, \
-                followed chiefly in southern India. Therefore, people \
-                consider following Nalla Neram to find good time today and \
-                avoid wrong timings, so it is accurate."
+                "question": ("Do purchased likes and followers interact with"
+                             " my content on these platforms?"),
+                "answer": ("While they boost your numbers, engagement"
+                           " ultimately depends on the quality and appeal"
+                           " of your content.")
             },
             "sixth": {
-                "question": "What is the literal meaning of the word Nalla \
-                Neram?",
-                "answer": "Nalla neram means “good or auspicious time” in its \
-                literal sense."
+                "question": ("Is there a satisfaction guarantee or"
+                             " refund policy in case I'm not satisfied"
+                             " with the service?"),
+                "answer": ("We prioritize customer satisfaction and have a"
+                           " refund policy outlined in our terms and"
+                           " conditions to ensure your peace of mind.")
             },
         }
         product_list = Product.objects.filter(is_active=True)
@@ -82,7 +88,10 @@ class CategoryDetailView(generic.DetailView):
         product_list = Product.objects.filter(
             is_active=True,
             category=category)
+        sub_category_list = ProductSubCategory.objects.filter(
+            category=category, is_active=True)
         context.update({
+            'sub_category_list': sub_category_list,
             'active_category': category,
             'product_list': product_list.order_by('priority'),
             'faqs': faqs_list

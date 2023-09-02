@@ -53,3 +53,16 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
+
+
+class UserQuery(models.Model):
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, blank=True,
+        null=True, related_name="queries")
+    fullname = models.CharField(max_length=255)
+    email = models.EmailField()
+    phone_number = PhoneNumberField()
+    comment = models.TextField()
+    is_solved = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

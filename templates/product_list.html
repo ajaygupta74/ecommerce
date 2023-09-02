@@ -1,65 +1,34 @@
 {% if product_list %}
-  <div class="container my-5">
-    <h4 class="my-4">Available Products</h4>
-    <div class="row mb-3">
-      <!-- for loop for product list -->
-      {% for product in product_list %}
-      <div class="col-sm-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 mb-4">
-          <a href="{% url 'product_detail' product.category.slug product.slug %}" class="product_item_link text-decoration-none text-dark">
-            <div class="product_card">
-              <div class="product_image col-3">
-                <img src="{{product.icon.url}}" class="img-fluid rounded-start" alt="...">
-              </div>
-                <div class="product_content col-9">
-                    <h5 class="product_title">{{product.title}}</h5>
-                    <p class="product_desc mb-2">{{product.web_description|safe|truncatewords:15}}</p>
-                    <p class="product_price mb-0">Price - Rs.{{product.min_price}} <del>Rs.{{product.max_price}}</del></p>
-                    <p class="product_purchase"><small class="text-muted">Likes - {{product.likes}}<br>Dislikes - {{product.dislikes}}</small></p>
-                </div>
-            </div>
-          </a>
+    <div class="container my-5">
+        <div class="container p-0">
+            {% for sub_category in sub_category_list %}
+                <input type="radio" class="btn-check" onclick="refresh_product_list('{{sub_category.id}}')" name="product_sub_category" id="{{sub_category.title}}" value="{{sub_category.id}}"
+                    autocomplete="off" checked>
+                <label class="btn btn-outline-secondary m-1" for="{{sub_category.title}}">{{sub_category.title}}</label>
+            {% endfor %}
         </div>
-      {% endfor %}
-      <!-- end for here-->
-    </div>
-  </div>
-{% endif %}
 
-    {% if page_list.paginator.num_pages > 1 %}
-    <div class="row">
-        <div class="col-md-12">
-            <ul class="pagination">
-                <li class="prev">
-                    {% if page_list.has_previous %}
-                        <a  href="?page={{ page_list.previous_page_number }}">
-                        {% else %}
-                            <a href="#">
-                            {% endif %}
-                            <i class="fa fa-angle-double-left" aria-hidden="true"></i> Prev</a>
-                    </li>
-                    {% if page_list.has_previous %}
-                        <li>
-                            <a href="?page={{ page_list.previous_page_number }}">{{ page_list.previous_page_number }}</a>
-                        </li>
-                    {% endif %}
-                    <li>
-                        <a href="?page={{ page_list.number }}" class="active">{{ page_list.number }}</a>
-                    </li>
-                    {% if page_list.has_next %}
-                        <li>
-                            <a class="nextpageclass" >{{ page_list.next_page_number }}</a>
-                        </li>
-                    {% endif %}
-                    <li class="next">
-                        {% if page_list.has_next %}
-                            <a class="nextpageclass" >
-                            {% else %}
-                                <a class="nextpageclass" href="#">
-                                {% endif %}
-                            Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
-                        </li>
-                    </ul>
+        <h4 class="my-4">Available Products</h4>
+        <div class="row mb-3">
+        <!-- for loop for product list -->
+        {% for product in product_list %}
+        <div class="col-sm-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 mb-4">
+            <a href="{% url 'product_detail' product.category.slug product.slug %}" class="product_item_link text-decoration-none text-dark">
+                <div class="product_card">
+                <div class="product_image col-3">
+                    <img src="{{product.icon.url}}" class="img-fluid rounded-start" alt="...">
                 </div>
+                    <div class="product_content col-9">
+                        <h5 class="product_title">{{product.title}}</h5>
+                        <p class="product_desc mb-2">{{product.web_description|safe|truncatewords:15}}</p>
+                        <p class="product_price mb-0">Price - Rs.{{product.min_price}} <del>Rs.{{product.max_price}}</del></p>
+                        <p class="product_purchase"><small class="text-muted">Likes - {{product.likes}}<br>Dislikes - {{product.dislikes}}</small></p>
+                    </div>
+                </div>
+            </a>
             </div>
+        {% endfor %}
+        <!-- end for here-->
         </div>
-    {% endif %}
+    </div>
+{% endif %}

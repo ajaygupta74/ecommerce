@@ -4,6 +4,7 @@ from django.contrib import admin
 from services.models import (
     Order,
     ProductCategory,
+    ProductSubCategory,
     Product,
     ProductAttribute,
     ProductCategoryFaq,
@@ -21,6 +22,11 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 class ProductCategoryAdmin(admin.ModelAdmin):
+    list_display = ['title', 'priority', 'is_active']
+    search_fields = ('title', )
+
+
+class ProductSubCategoryAdmin(admin.ModelAdmin):
     list_display = ['title', 'priority', 'is_active']
     search_fields = ('title', )
 
@@ -69,6 +75,7 @@ class OrderAdmin(admin.ModelAdmin):
 admin.site.register(Order, OrderAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductCategory, ProductCategoryAdmin)
+admin.site.register(ProductSubCategory, ProductSubCategoryAdmin)
 admin.site.register(ProductAttribute, ProductAttributeAdmin)
 admin.site.register(ProductFaq, ProductFaqAdmin)
 admin.site.register(ProductCategoryFaq, ProductCategoryFaqAdmin)

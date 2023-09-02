@@ -1,17 +1,21 @@
 {% extends 'base.html' %}
 
+{% block title %}Growsmo | {% if active_category %}{{active_category.title}}{% else %}Home{% endif %}{% endblock title %}
 {% block main_content %}
 
 
 <section class="section-padding-home pt-0">
-<div id="banner_content" class="container-expand-lg mt-0" style="background-color: beige;">
+<div id="banner_content" class="container-expand-lg mb-3" style="background-color: #f3eaea;">
 	<div class="container py-3">
-		<h4 class="my-3">{% if active_category %}{{active_category.title}}{% else %}Recommended Services{% endif %}</h4>
+		<h4 class="my-3">{% if active_category %}{{active_category.title}}{% else %}What we offer ?{% endif %}</h4>
 		{% if active_category %}{{active_category.web_description|safe}}
 		{% else %}
-		In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form
-		of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placehold
-		er before final copy is a
+		In today's digitally interconnected world, social media has evolved into a vital tool for personal branding,
+		business growth, and networking. Our platform offers a range of services tailored to the most prominent social
+		media networks, including Instagram, Facebook, YouTube, and LinkedIn. Whether you're an aspiring influencer,
+		a budding entrepreneur, or a seasoned professional, we have the solutions to elevate your online presence and meet your objectives.<br><br>
+		Our services encompass boosting your followers, likes, shares, views, and connections, strategically tailored to each platform's unique dynamics.
+		We understand the power of a strong online presence, and we're here to help you harness it.
 		{% endif %}
 	</div>
 </div>

@@ -18,12 +18,14 @@ from django.urls import path, include
 from django.shortcuts import redirect
 from project2 import settings
 from django.conf.urls.static import static
+from users.views import contact_us
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', lambda req: redirect('services/')),
     path('services/', include("services.urls")),
     path('profile/', include("users.urls")),
+    path('contactus/', contact_us, name='contact_us'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,9 +1,10 @@
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from services.models import Order
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
 
-from users.models import User
+from users.models import User, UserQuery
 
 
 def user_signup(request):
@@ -64,3 +65,35 @@ def user_detail(request):
         'inprogress_orders': inprogress_orders
     }
     return render(request, template, context)
+
+
+def contact_us(request):
+    template = 'help.html'
+    user = request.user
+    queries = []
+    if not user.is_anonymous:
+        queries = UserQuery.objects.filter(user=user).order_by('-created_at')
+    if request.method == 'POST':
+        data = {
+            'user': user if not user.is_anonymous else None,
+            'fullname': request.POST['fullname'],
+            'email': request.POST['email'],
+            'phone_number': request.POST['phone'],
+            'comment': request.POST['comment'],
+        }
+        UserQuery.objects.create(**data)
+        messages.success(
+            request, ('Your message has been recieved, we will contact'
+                      ' you on your given information.'
+                      ' This can take upto 4-5 hours'))
+        return redirect(request.path)
+    context = {'queries': queries}
+    return render(request, template, context)
+
+
+def close_query(request, query_pk):
+    user_query = UserQuery.objects.filter(pk=query_pk).first()
+    if user_query:
+        user_query.is_solved = True
+        user_query.save(update_fields=['is_solved'])
+    return redirect(contact_us)
