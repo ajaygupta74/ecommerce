@@ -1,27 +1,21 @@
-{% load static i18n %}
+{% load static %}
 {% if faqs %}
 <section class="section-padding-40 faq-section pt-5 mb-5" itemscope itemtype="https://schema.org/FAQPage">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <h2>Frequently Asked Questions</h2>
-                <div id="accordion">
+                <div class="accordion" id="accordionExample">
                     {% for faq_item in faqs %}
-                        <div class="card" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                            <button class="btn btn-link {% ifequal 0 forloop.counter0 %} {% else %} collapsed {% endifequal %}"
-                                data-toggle="collapse" data-target="#collapse{{forloop.counter0}}"
-                                aria-expanded="{% ifequal 0 forloop.counter0 %} true {% else %} false {% endifequal %}" aria-controls="collapse{{forloop.counter0}}">
-                                <div class="card-header" id="heading{{forloop.counter0}}">
-                                    <h5 class="mb-0" itemprop="name">
-                                        {{ faq_item.question }}
-                                    </h5>
-                                </div>
+                        <div class="accordion-item">
+                            <p class="accordion-header" id="heading{{forloop.counter0}}">
+                            <button style="font-weight: 500;" class="accordion-button {% ifequal 0 forloop.counter0 %} {% else %} collapsed {% endifequal %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseheading{{forloop.counter0}}" aria-expanded="{% ifequal 0 forloop.counter0%} true {% else %} false {%endifequal%}" aria-controls="collapseheading{{forloop.counter0}}" aria-controls="collapseheading{{forloop.counter0}}">
+                                {{ faq_item.question }}
                             </button>
-
-                            <div id="collapse{{forloop.counter0}}" class="collapse {% ifequal 0 forloop.counter0 %} show {%endifequal%}" aria-labelledby="heading{{forloop.counter0}}"
-                                data-parent="#accordion" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                                <div class="card-body" itemprop="text">
-                                    {{ faq_item.answer }}
+                            </p>
+                            <div id="collapseheading{{forloop.counter0}}" class="accordion-collapse collapse {% ifequal 0 forloop.counter0 %} show {% endifequal %}" aria-labelledby="heading{{forloop.counter0}}" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    {{ faq_item.answer | safe }}
                                 </div>
                             </div>
                         </div>
@@ -36,26 +30,19 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h4>{% trans "FAQ--Frequently Asked Questions" %}</h4>
-                <div id="accordion">
-                    {% comment %} {% for faqindex in faqs %} {% endcomment %}
+                <h4> Satatic FAQ--Frequently Asked Questions</h4>
+                <div class="accordion" id="accordionExample">
                     {% for key, value in static_faqs.items %}
-                        <div class="card" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                            <button class="btn btn-link {% if key == 'first' %} {% else %} collapsed {% endif %}"
-                                data-toggle="collapse" data-target="#collapse{{key}}"
-                                aria-expanded="{%if key == 'first'%} true {% else %} false {%endif%}" aria-controls="collapse{{key}}">
-                                <div class="card-header" id="heading{{key}}">
-                                    <h5 class="mb-0" itemprop="name">
-                                        {{ value.question }}
-                                    </h5>
-                                </div>
+                        <div class="accordion-item">
+                            <p class="accordion-header" id="{{key}}">
+                            <button style="font-weight: 500;" class="accordion-button {% if key == 'first' %} {% else %} collapsed {% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{key}}" aria-expanded="{%if key == 'first'%} true {% else %} false {%endif%}" aria-controls="collapse{{key}}" aria-controls="collapse{{key}}">
+                                {{ value.question }}
                             </button>
-
-                            <div id="collapse{{key}}" class="collapse {%if key == 'first'%} show {%endif%}" aria-labelledby="heading{{key}}"
-                                data-parent="#accordion" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                                <div class="card-body text-justify" itemprop="text">
-                                    {{ value.answer | safe }}
-                                </div>
+                            </p>
+                            <div id="collapse{{key}}" class="accordion-collapse collapse {% if key == 'first' %} show {% endif %}" aria-labelledby="{{key}}" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                {{ value.answer | safe }}
+                            </div>
                             </div>
                         </div>
                     {% endfor %}

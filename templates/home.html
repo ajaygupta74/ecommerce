@@ -19,7 +19,23 @@
 		{% endif %}
 	</div>
 </div>
+<div class="container mt-5">
+	{% if sub_category_list %}
+		<div class="container p-0">
+			{% for sub_category in sub_category_list %}
+				<input type="radio" class="btn-check" onclick="refresh_product_list('{{active_category.slug}}', '{{sub_category.slug}}')" name="sel_sub_cat" id="{{sub_category.title}}" value="{{sub_category.slug}}"
+					autocomplete="off" checked>
+				<label class="btn btn-outline-secondary btn-sm mb-1" for="{{sub_category.title}}">{{sub_category.title}}</label>
+			{% endfor %}
+			<input type="radio" class="btn-check" onclick="refresh_product_list('{{active_category.slug}}')" name="sel_sub_cat" id="sub_category_all" value=""
+				autocomplete="off" checked>
+			<label class="btn btn-outline-secondary btn-sm mb-1" for="sub_category_all">All type</label>
+		</div>
+	{% endif %}
+</div>
+<div id="product_list">
 {% include 'product_list.html' %}
+</div>
 {% include 'faqs.html' %}
 </section>
 {% endblock main_content %}

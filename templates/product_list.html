@@ -1,13 +1,5 @@
 {% if product_list %}
-    <div class="container my-5">
-        <div class="container p-0">
-            {% for sub_category in sub_category_list %}
-                <input type="radio" class="btn-check" onclick="refresh_product_list('{{sub_category.id}}')" name="product_sub_category" id="{{sub_category.title}}" value="{{sub_category.id}}"
-                    autocomplete="off" checked>
-                <label class="btn btn-outline-secondary m-1" for="{{sub_category.title}}">{{sub_category.title}}</label>
-            {% endfor %}
-        </div>
-
+    <div class="container my-3">
         <h4 class="my-4">Available Products</h4>
         <div class="row mb-3">
         <!-- for loop for product list -->
@@ -15,18 +7,18 @@
         <div class="col-sm-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 mb-4">
             <a href="{% url 'product_detail' product.category.slug product.slug %}" class="product_item_link text-decoration-none text-dark">
                 <div class="product_card">
-                <div class="product_image col-3">
-                    <img src="{{product.icon.url}}" class="img-fluid rounded-start" alt="...">
-                </div>
+                    <div class="product_image col-3">
+                        <img src="{{product.icon.url}}" class="img-fluid rounded-start" alt="...">
+                    </div>
                     <div class="product_content col-9">
-                        <h5 class="product_title">{{product.title}}</h5>
-                        <p class="product_desc mb-2">{{product.web_description|safe|truncatewords:15}}</p>
-                        <p class="product_price mb-0">Price - Rs.{{product.min_price}} <del>Rs.{{product.max_price}}</del></p>
-                        <p class="product_purchase"><small class="text-muted">Likes - {{product.likes}}<br>Dislikes - {{product.dislikes}}</small></p>
+                        <h5 class="product_title" style="color: violet;">{{product.title}}</h5>
+                        {% comment %} <p class="product_desc mb-2">{{product.web_description|safe|truncatewords:15}}</p> {% endcomment %}
+                        <p class="product_price mb-0" style="font-weight: 500; color: green;">Price - Rs.{{product.min_price}} <del>Rs.{{product.max_price}}</del></p>
+                        <p class="product_purchase mb-0 text-muted">Likes - {{product.likes}}<br>Dislikes - {{product.dislikes}}</p>
                     </div>
                 </div>
             </a>
-            </div>
+        </div>
         {% endfor %}
         <!-- end for here-->
         </div>

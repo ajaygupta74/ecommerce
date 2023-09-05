@@ -34,5 +34,23 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+function refresh_product_list(cat='', sub_cat=''){
+	var csrf_token = '{{csrf_token}}';
+	$.ajax({
+		type: 'POST',
+		url: `/services/${cat}/`,
+		data: { sel_sub_cat: sub_cat },
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader('X-CSRFToken', csrf_token);
+		},
+		success: function(data) {
+			document.getElementById("product_list").innerHTML = data
+		}
+	});
+}
+
+
+</script>
 </body>
 </html>

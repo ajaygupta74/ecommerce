@@ -1,6 +1,6 @@
 import logging
 from django.db.models import F, Min, Max
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.views import generic
 from project2 import messages
 
@@ -89,7 +89,9 @@ class CategoryDetailView(generic.DetailView):
             is_active=True,
             category=category)
         sub_category_list = ProductSubCategory.objects.filter(
-            category=category, is_active=True)
+            products__isnull=False,
+            category=category,
+            is_active=True)
         context.update({
             'sub_category_list': sub_category_list,
             'active_category': category,
@@ -97,6 +99,18 @@ class CategoryDetailView(generic.DetailView):
             'faqs': faqs_list
         })
         return context
+
+    def post(self, request, *args, **kwargs):
+        category = self.get_object()
+        sel_sub_cat = request.POST.get('sel_sub_cat', '')
+        product_list = Product.objects.filter(
+            is_active=True,
+            category=category)
+        if sel_sub_cat:
+            product_list = product_list.filter(
+                sub_category__slug=sel_sub_cat)
+        context = {'product_list': product_list}
+        return render(request, 'product_list.html', context)
 
 
 class ProductDetailView(generic.DetailView):

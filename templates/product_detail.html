@@ -11,26 +11,25 @@
 </nav>
 
 <div class="container mb-3">
+  <div class="pt-4 mb-4" id="product_detail_banner" style="background-image: url({{product.banner.url}});">
+  </div>
   <div class="product_card">
-    <div class="product_image col-3 pt-4">
-      <img src="{{product.icon.url}}" class="img-fluid rounded-start" alt="...">
-    </div>
-      <div class="product_detail_content col-9 border-0 p-4">
+      <div class="product_detail_content border-0">
           <h3 class="product_title">{{product.title}}</h3>
           <p class="product_price mb-0">Starting from - Rs.{{starting_price}}</p>
           <p class="product_purchase"><small class="text-muted">Likes - {{product.likes}}<br>Dislikes - {{product.dislikes}}</small></p>
           <div>
           Choose :
-            <div class="container mt-2">
+            <div class="container mt-2 p-0">
             {% for attribute in product_attributes %}
             <input type="radio" class="btn-check" onclick="set_total_price('{{attribute.offer_price}}')" name="product_attribute" id="{{attribute.title}}" value="{{attribute.value}}"
              autocomplete="off" {% if attribute.offer_price == starting_price %}checked{% endif %}>
-            <label class="btn btn-outline-secondary m-1" for="{{attribute.title}}">{{attribute.title}}</label>
+            <label class="btn btn-outline-secondary btn-sm" for="{{attribute.title}}">{{attribute.title}}</label>
             {% endfor %}
             </div>
           </div>
           <p class="product_price mt-4 mb-2">Total Price - Rs.<span id="total_price">{{starting_price}}</span></p>
-          <button type="button" onclick="redirect_to_order_detail()" class="btn btn-success mb-4">Proceed to Payment</button>
+          <button type="button btn-sm" onclick="redirect_to_order_detail()" class="btn btn-success mb-4 btn-sm">Proceed to Payment</button>
           <h5 class="mb-2">Description</h5>
           <p class="product_desc">{{product.web_description|safe}}</p>
 
