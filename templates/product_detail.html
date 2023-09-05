@@ -24,7 +24,7 @@
             {% for attribute in product_attributes %}
             <input type="radio" class="btn-check" onclick="set_total_price('{{attribute.offer_price}}')" name="product_attribute" id="{{attribute.title}}" value="{{attribute.value}}"
              autocomplete="off" {% if attribute.offer_price == starting_price %}checked{% endif %}>
-            <label class="btn btn-outline-secondary btn-sm" for="{{attribute.title}}">{{attribute.title}}</label>
+            <label class="btn btn-outline-secondary btn-sm mb-1" for="{{attribute.title}}">{{attribute.title}}</label>
             {% endfor %}
             </div>
           </div>

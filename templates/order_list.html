@@ -10,14 +10,14 @@
         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body">
                 {% if inprogress_orders %}
-                <div class="row mb-3">
-                    {% for order in inprogress_orders %}
-                        <div class="col-sm-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 mb-4">
-                            <div class="product_card">
-                                <div class="product_image col-3">
-                                    <a href="{% url 'product_detail' order.product.category.slug order.product.slug %}" class="product_item_link text-decoration-none text-dark">
-                                    <img src="{{order.product.icon.url}}" class="img-fluid rounded-start" alt="..."></a>
-                                </div>
+                    <div class="row mb-3">
+                        {% for order in inprogress_orders %}
+                            <div class="col-sm-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 mb-4">
+                                <div class="product_card">
+                                    <div class="product_image col-3">
+                                        <a href="{% url 'product_detail' order.product.category.slug order.product.slug %}" class="product_item_link text-decoration-none text-dark">
+                                        <img src="{{order.product.icon.url}}" class="img-fluid rounded-start" alt="..."></a>
+                                    </div>
                                     <div class="product_content col-9">
                                         <h5 class="product_title">
                                             <a href="{% url 'product_detail' order.product.category.slug order.product.slug %}" class="product_item_link text-decoration-none text-dark">
@@ -29,13 +29,13 @@
                                             onclick="window.location.href='{% url 'order_detail' order.product.category.slug order.product.slug %}'">View Details</button>
                                     </div>
                                 </div>
-                        </div>
-                    {% endfor %}
-                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
                 {% else %}
-                <div class="container text-center">
-                    <img style="width: 30%;" src="{% static 'img/no_orders_found.png' %}">
-                </div>
+                    <div class="container text-center">
+                        <img style="width: 30%;" src="{% static 'img/no_orders_found.png' %}">
+                    </div>
                 {% endif %}
             </div>
         </div>
@@ -52,14 +52,14 @@
         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
             <div class="accordion-body">
                 {% if completed_orders %}
-                <div class="row mb-3">
-                    {% for order in completed_orders %}
-                        <div class="col-sm-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 mb-4">
-                            <div class="product_card">
-                                <div class="product_image col-3">
-                                    <a href="{% url 'product_detail' order.product.category.slug order.product.slug %}" class="product_item_link text-decoration-none text-dark">
-                                    <img src="{{order.product.icon.url}}" class="img-fluid rounded-start" alt="..."></a>
-                                </div>
+                    <div class="row mb-3">
+                        {% for order in completed_orders %}
+                            <div class="col-sm-12 col-xs-12 col-md-4 col-lg-4 col-xl-4 mb-4">
+                                <div class="product_card">
+                                    <div class="product_image col-3">
+                                        <a href="{% url 'product_detail' order.product.category.slug order.product.slug %}" class="product_item_link text-decoration-none text-dark">
+                                        <img src="{{order.product.icon.url}}" class="img-fluid rounded-start" alt="..."></a>
+                                    </div>
                                     <div class="product_content col-9">
                                         <h5 class="product_title">
                                             <a href="{% url 'product_detail' order.product.category.slug order.product.slug %}" class="product_item_link text-decoration-none text-dark">
@@ -71,13 +71,13 @@
                                         onclick="window.location.href='{% url 'order_detail' order.product.category.slug order.product.slug %}'">View Details</button>
                                     </div>
                                 </div>
-                        </div>
-                    {% endfor %}
-                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
                 {% else %}
-                <div class="container text-center">
-                    <img style="width: 30%;" src="{% static 'img/no_orders_found.png' %}">
-                </div>
+                    <div class="container text-center">
+                        <img style="width: 30%;" src="{% static 'img/no_orders_found.png' %}">
+                    </div>
                 {% endif %}
             </div>
         </div>
