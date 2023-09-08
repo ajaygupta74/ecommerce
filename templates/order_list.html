@@ -22,7 +22,7 @@
                                         <h5 class="product_title">
                                             <a href="{% url 'product_detail' order.product.category.slug order.product.slug %}" class="product_item_link text-decoration-none text-dark">
                                             {{order.product.title}}</a></h5>
-                                        <p class="product_desc mb-2">{{order.product.web_description|safe|truncatewords:15}}</p>
+                                        {% comment %} <p class="product_desc mb-2">{{order.product.web_description|safe|truncatewords:15}}</p> {% endcomment %}
                                         <p class="product_price mb-0">Price - Rs.{{order.order_price}}</p>
                                         <p class="card-text"><small class="text-muted">{{order.updated_at}}</small></p>
                                         <button type="button" class="btn btn-secondary btn-sm"
@@ -64,7 +64,7 @@
                                         <h5 class="product_title">
                                             <a href="{% url 'product_detail' order.product.category.slug order.product.slug %}" class="product_item_link text-decoration-none text-dark">
                                             {{order.product.title}}</a></h5>
-                                        <p class="product_desc mb-2">{{order.product.web_description|safe|truncatewords:15}}</p>
+                                        {% comment %} <p class="product_desc mb-2">{{order.product.web_description|safe|truncatewords:15}}</p> {% endcomment %}
                                         <p class="product_price mb-0">Price - Rs.{{order.order_price}}</p>
                                         <p class="card-text"><small class="text-muted">{{order.updated_at}}</small></p>
                                         <button type="button" class="btn btn-secondary btn-sm"

@@ -10,58 +10,66 @@
   </ol>
 </nav>
 
-<div class="container mb-3">
-  <div class="pt-4 mb-4" id="product_detail_banner" style="background-image: url({{product.banner.url}});">
-  </div>
-  <div class="product_card">
-      <div class="product_detail_content border-0">
-          <h3 class="product_title">{{product.title}}</h3>
-          <p class="product_price mb-0">Starting from - Rs.{{starting_price}}</p>
-          <p class="product_purchase"><small class="text-muted">Likes - {{product.likes}}<br>Dislikes - {{product.dislikes}}</small></p>
-          <div>
-          Choose :
-            <div class="container mt-2 p-0">
-            {% for attribute in product_attributes %}
-            <input type="radio" class="btn-check" onclick="set_total_price('{{attribute.offer_price}}')" name="product_attribute" id="{{attribute.title}}" value="{{attribute.value}}"
-             autocomplete="off" {% if attribute.offer_price == starting_price %}checked{% endif %}>
-            <label class="btn btn-outline-secondary btn-sm mb-1" for="{{attribute.title}}">{{attribute.title}}</label>
-            {% endfor %}
-            </div>
-          </div>
-          <p class="product_price mt-4 mb-2">Total Price - Rs.<span id="total_price">{{starting_price}}</span></p>
-          <button type="button btn-sm" onclick="redirect_to_order_detail()" class="btn btn-success mb-4 btn-sm">Proceed to Payment</button>
-          <h5 class="mb-2">Description</h5>
-          <p class="product_desc">{{product.web_description|safe}}</p>
-
-          {% if product_reviews %}
-          <div>
-            <h5 class="mt-4">Reviews</h5>
-            <div class="review-rating mb-3">
-              <span class="rating-star">
-                <i class="fa fa-star" style="color:#FDBF3E;"></i>
-              </span> <strong> {{ product.star_ratings }} out of 5</strong>
-              <span class="number_customer_rating">({{ product.total_review }} customer ratings)</span>
-            </div>
-              {% for review in product_reviews %}
-              <div class="card mb-2">
-                <div class="card-body">
-                  <strong class="card-title">{{review.first_name}} {{review.last_name}}</strong>
-                  <span class="card-subtitle ms-2 py-1 px-2 bg-warning text-muted">{{review.ratings}} <img src="{% static 'icons/star-fill.svg' %}"></span><br>
-                  <span class="card-text text-secondary" style="font-size:0.9em;">{{review.review_time}}</span>
-                  <p class="card-text mb-2 mt-1">{{review.review_msg}}</p>
-                  {% if review.reply_msg %}
-                    <div class="card-body p-2" style="background-color: #edeaea;">
-                      <span class="card-text text-secondary" style="font-size:0.9em;">Growsmo - {{review.reply_time}}</span>
-                      <p class="card-text mb-2 mt-1">{{review.review_msg}}</p>
-                    </div>
-                  {% endif %}
-                </div>
-              </div>
-              {% endfor %}
-          </div>
-          {% endif %}
+<div class="container my-4">
+  <div class="row">
+    <div class="col-sm-12 col-lg-3 col-md-3 mb-4">
+      <div class="product_image">
+        <img src="{{product.icon.url}}" class="img-fluid rounded-start" alt="{{product.title}}">
       </div>
+    </div>
+    <div class="col-sm-12 col-md-9 col-lg-9">
+      <div class="product_card">
+        <div class="product_detail_content border-0">
+            <h3 class="product_title">{{product.title}}</h3>
+            <p class="product_price mb-0">Starting from - Rs.{{starting_price}}</p>
+            <p class="product_purchase"><small class="text-muted">Likes - {{product.likes}}<br>Dislikes - {{product.dislikes}}</small></p>
+            <div>
+            Choose :
+              <div class="container mt-2 p-0">
+              {% for attribute in product_attributes %}
+              <input type="radio" class="btn-check" onclick="set_total_price('{{attribute.offer_price}}')" name="product_attribute" id="{{attribute.title}}" value="{{attribute.value}}"
+              autocomplete="off" {% if attribute.offer_price == starting_price %}checked{% endif %}>
+              <label class="btn btn-outline-secondary btn-sm mb-1" for="{{attribute.title}}">{{attribute.title}}</label>
+              {% endfor %}
+              </div>
+            </div>
+            <p class="product_price mt-4 mb-2">Total Price - Rs.<span id="total_price">{{starting_price}}</span></p>
+            <button type="button btn-sm" onclick="redirect_to_order_detail()" class="btn btn-success mb-4 btn-sm">Proceed to Payment</button>
+            <h5 class="mb-2">Description</h5>
+            <p class="product_desc">{{product.web_description|safe}}</p>
+
+            {% if product_reviews %}
+            <div>
+              <h5 class="mt-4">Reviews</h5>
+              <div class="review-rating mb-3">
+                <span class="rating-star">
+                  <i class="fa fa-star" style="color:#FDBF3E;"></i>
+                </span> <strong> {{ product.star_ratings }} out of 5</strong>
+                <span class="number_customer_rating">({{ product.total_review }} customer ratings)</span>
+              </div>
+                {% for review in product_reviews %}
+                <div class="card mb-2">
+                  <div class="card-body">
+                    <strong class="card-title">{{review.first_name}} {{review.last_name}}</strong>
+                    <span class="card-subtitle ms-2 py-1 px-2 bg-warning text-muted">{{review.ratings}} <img src="{% static 'icons/star-fill.svg' %}"></span><br>
+                    <span class="card-text text-secondary" style="font-size:0.9em;">{{review.review_time}}</span>
+                    <p class="card-text mb-2 mt-1">{{review.review_msg}}</p>
+                    {% if review.reply_msg %}
+                      <div class="card-body p-2" style="background-color: #edeaea;">
+                        <span class="card-text text-secondary" style="font-size:0.9em;">Growsmo - {{review.reply_time}}</span>
+                        <p class="card-text mb-2 mt-1">{{review.review_msg}}</p>
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+      </div>
+    </div>
   </div>
+</div>
 </div>
 
 
