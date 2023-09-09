@@ -92,7 +92,7 @@ class CategoryDetailView(generic.DetailView):
         sub_category_list = ProductSubCategory.objects.filter(
             products__isnull=False,
             category=category,
-            is_active=True)
+            is_active=True).distinct()
         context.update({
             'sub_category_list': sub_category_list,
             'active_category': category,
