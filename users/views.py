@@ -106,6 +106,11 @@ def refund_policy(request):
     return render(request, template_name, {})
 
 
+def ship_and_delivery(request):
+    template_name = 'policies/ship_and_delivery.html'
+    return render(request, template_name, {})
+
+
 def close_query(request, query_pk):
     user_query = UserQuery.objects.filter(pk=query_pk).first()
     if user_query:

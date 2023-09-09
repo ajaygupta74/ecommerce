@@ -22,7 +22,8 @@ from users.views import (
     contact_us,
     terms_and_conditions,
     privacy_policy,
-    refund_policy
+    refund_policy,
+    ship_and_delivery,
 )
 
 urlpatterns = [
@@ -31,9 +32,12 @@ urlpatterns = [
     path('services/', include("services.urls")),
     path('profile/', include("users.urls")),
     path('contactus/', contact_us, name='contact_us'),
-    path('terms-and-conditions/', terms_and_conditions, name='contact_us'),
-    path('privacy-policy/', privacy_policy, name='contact_us'),
-    path('refund-policy/', refund_policy, name='contact_us'),
+    path('privacy-policy/', privacy_policy, name='privacy_policy'),
+    path('refund-policy/', refund_policy, name='refund_policy'),
+    path('ship-and-delivery-policy/',
+         ship_and_delivery, name='ship_and_delivery'),
+    path('terms-and-conditions/',
+         terms_and_conditions, name='terms_and_conditions'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
