@@ -18,7 +18,12 @@ from django.urls import path, include
 from django.shortcuts import redirect
 from project2 import settings
 from django.conf.urls.static import static
-from users.views import contact_us
+from users.views import (
+    contact_us,
+    terms_and_conditions,
+    privacy_policy,
+    refund_policy
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,6 +31,9 @@ urlpatterns = [
     path('services/', include("services.urls")),
     path('profile/', include("users.urls")),
     path('contactus/', contact_us, name='contact_us'),
+    path('terms-and-conditions/', terms_and_conditions, name='contact_us'),
+    path('privacy-policy/', privacy_policy, name='contact_us'),
+    path('refund-policy/', refund_policy, name='contact_us'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

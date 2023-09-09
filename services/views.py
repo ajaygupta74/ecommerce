@@ -1,5 +1,6 @@
 import logging
 from django.db.models import F, Min, Max
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.views import generic
 from project2 import messages
@@ -139,20 +140,34 @@ def order_detail(request, category_slug, product_slug):
     template_name = 'order_detail.html'
     category = ProductCategory.objects.filter(slug=category_slug).last()
     product = Product.objects.filter(slug=product_slug).last()
-    attr_value = request.GET.get('value', '')
-    product_attribute = None
-    if attr_value:
+    order_id = request.GET.get('order_id', '')
+    order = None
+    if order_id:
+        order = Order.objects.filter(pk=order_id).first()
+    if request.method == 'POST':
+        attr_id = request.POST.get('attr_id', '')
+        order_price = request.POST.get('order_price', '')
+        product_attribute = None
         product_attribute = ProductAttribute.objects.filter(
-            product=product, value=int(attr_value)).first()
-    defaults = {
-        'order_price': product_attribute.offer_price,
-        'description': 'order_initiated'}
-    order, created = Order.objects.update_or_create(
-        user=request.user,
-        product=product,
-        payment_done=False,
-        status=Order.Status.INITIATED,
-        defaults=defaults)
+            product=product, pk=int(attr_id)).first()
+        defaults = {
+            'order_price': float(order_price),
+            'description': f'{product.title}',
+            'payment_json': {
+                'product_attr_id': attr_id,
+                'value': f'{product_attribute.value}'}}
+        if not order_price and product_attribute:
+            defaults['order_price'] = product_attribute.offer_price
+        order, created = Order.objects.update_or_create(
+            user=request.user,
+            product=product,
+            payment_done=False,
+            status=Order.Status.INITIATED,
+            defaults=defaults)
+        response_data = {
+            'status': 'success',
+            'order_id': order.id}
+        return JsonResponse(response_data)
     context = {
         'product': product,
         'category': category,

@@ -195,7 +195,7 @@ class Order(models.Model):
         max_length=2)
     order_price = models.DecimalField(
         null=True, decimal_places=2, max_digits=10)
-    payment_json = models.TextField(blank=True)
+    payment_json = models.JSONField(blank=True, null=True)
     description = models.CharField(max_length=250, null=True, blank=True)
     status_timeline = models.JSONField(default=list)
     created_at = models.DateTimeField(auto_now_add=True)

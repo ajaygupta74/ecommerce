@@ -19,14 +19,14 @@
                                         <img src="{{order.product.icon.url}}" class="img-fluid rounded-start" alt="..."></a>
                                     </div>
                                     <div class="product_content col-9">
-                                        <h5 class="product_title">
-                                            <a href="{% url 'product_detail' order.product.category.slug order.product.slug %}" class="product_item_link text-decoration-none text-dark">
+                                        <h5 class="product_title" style="color: violet;">
+                                            <a href="{% url 'product_detail' order.product.category.slug order.product.slug %}" class="product_item_link text-decoration-none">
                                             {{order.product.title}}</a></h5>
                                         {% comment %} <p class="product_desc mb-2">{{order.product.web_description|safe|truncatewords:15}}</p> {% endcomment %}
-                                        <p class="product_price mb-0">Price - Rs.{{order.order_price}}</p>
+                                        <p class="product_price mb-0" style="font-weight: 500; color: green;">Price - Rs.{{order.order_price}}</p>
                                         <p class="card-text"><small class="text-muted">{{order.updated_at}}</small></p>
                                         <button type="button" class="btn btn-secondary btn-sm"
-                                            onclick="window.location.href='{% url 'order_detail' order.product.category.slug order.product.slug %}'">View Details</button>
+                                            onclick="window.location.href='{% url 'order_detail' order.product.category.slug order.product.slug %}?order_id={{order.id}}'">View Details</button>
                                     </div>
                                 </div>
                             </div>
@@ -61,14 +61,14 @@
                                         <img src="{{order.product.icon.url}}" class="img-fluid rounded-start" alt="..."></a>
                                     </div>
                                     <div class="product_content col-9">
-                                        <h5 class="product_title">
-                                            <a href="{% url 'product_detail' order.product.category.slug order.product.slug %}" class="product_item_link text-decoration-none text-dark">
+                                        <h5 class="product_title" style="color: violet;">
+                                            <a href="{% url 'product_detail' order.product.category.slug order.product.slug %}" class="product_item_link text-decoration-none">
                                             {{order.product.title}}</a></h5>
                                         {% comment %} <p class="product_desc mb-2">{{order.product.web_description|safe|truncatewords:15}}</p> {% endcomment %}
-                                        <p class="product_price mb-0">Price - Rs.{{order.order_price}}</p>
+                                        <p class="product_price mb-0" style="font-weight: 500; color: green;">Price - Rs.{{order.order_price}}</p>
                                         <p class="card-text"><small class="text-muted">{{order.updated_at}}</small></p>
                                         <button type="button" class="btn btn-secondary btn-sm"
-                                        onclick="window.location.href='{% url 'order_detail' order.product.category.slug order.product.slug %}'">View Details</button>
+                                        onclick="window.location.href='{% url 'order_detail' order.product.category.slug order.product.slug %}?order_id={{order.id}}'">View Details</button>
                                     </div>
                                 </div>
                             </div>

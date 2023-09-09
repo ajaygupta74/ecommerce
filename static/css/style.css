@@ -122,3 +122,18 @@ footer{
         width: 50%;
     }
 }
+
+.ftr_list_item{
+    list-style-type: none;
+}
+.ftr_list_link {
+    color: white;
+    text-decoration: none;
+}
+.ftr_list_link:hover {
+    color: #1cc293;
+}
+.ftr_heading{
+    width: fit-content;
+    border-bottom: 3px solid #689c8d;
+}

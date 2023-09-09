@@ -91,6 +91,21 @@ def contact_us(request):
     return render(request, template, context)
 
 
+def terms_and_conditions(request):
+    template_name = 'policies/terms_and_conditions.html'
+    return render(request, template_name, {})
+
+
+def privacy_policy(request):
+    template_name = 'policies/privacy_policy.html'
+    return render(request, template_name, {})
+
+
+def refund_policy(request):
+    template_name = 'policies/refund_policy.html'
+    return render(request, template_name, {})
+
+
 def close_query(request, query_pk):
     user_query = UserQuery.objects.filter(pk=query_pk).first()
     if user_query:

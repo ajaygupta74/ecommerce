@@ -29,7 +29,41 @@
 
 {% block footer_content %}
 <footer>
-	<p class="mb-0 py-3">Copyright © GrowSmo 2023</p>
+	<div class="container mb-0">
+		<div class="row pt-3 pb-3">
+			<div class="col-sm-12 col-md-4 col-lg-4 text-start">
+				<ul><h5 class="mb-3 ftr_heading py-3">Quick Links</h5>
+					<li class='ftr_list_item my-1'><a class="ftr_list_link" href="/">Home</a></li>
+					{% if user.is_authenticated %}
+					<li class='ftr_list_item my-1'><a class="ftr_list_link" href="{% url 'user_detail'%}">Profile</a></li>
+					<li class='ftr_list_item my-1'><a class="ftr_list_link" href="{% url 'user_logout'%}">Logout</a></li>
+					<li class='ftr_list_item my-1'><a class="ftr_list_link" href="{% url 'contact_us'%}">My Queries</a></li>
+					{% else %}
+					<li class='ftr_list_item my-1'><a class="ftr_list_link" href="" class="nav-link" data-bs-toggle="modal" data-bs-target="#signupmodal">Signup</a></li>
+					<li class='ftr_list_item my-1'><a class="ftr_list_link" href="" class="nav-link" data-bs-toggle="modal" data-bs-target="#loginmodal">Login</a></li>
+					{% endif %}
+				</ul>
+			</div>
+			<div class="col-sm-12 col-md-4 col-lg-4 text-start">
+				<ul><h5 class="mb-3 ftr_heading py-3">Recommendation</h5>
+					<li class='ftr_list_item my-1'><a class="ftr_list_link" href="{% url 'category_detail' 'instagram'  %}">Instagram</a></li>
+					<li class='ftr_list_item my-1'><a class="ftr_list_link" href="{% url 'category_detail' 'facebook'  %}">Facebook</a></li>
+					<li class='ftr_list_item my-1'><a class="ftr_list_link" href="{% url 'category_detail' 'telegram'  %}">Telegram</a></li>
+					<li class='ftr_list_item my-1'><a class="ftr_list_link" href="{% url 'category_detail' 'youtube'  %}">Youtube</a></li>
+					<li class='ftr_list_item my-1'><a class="ftr_list_link" href="{% url 'category_detail' 'twitter'  %}">Twitter</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-12 col-md-4 col-lg-4 text-start">
+				<ul><h5 class="mb-3 ftr_heading py-3">Policies</h5>
+					<li class='ftr_list_item my-1'><a class="ftr_list_link" href="/terms-and-conditions/">Terms and condition</a></li>
+					<li class='ftr_list_item my-1'><a class="ftr_list_link" href="/privacy-policy/">Privacy Policy</a></li>
+					<li class='ftr_list_item my-1'><a class="ftr_list_link" href="/refund-policy/">Refund Policy</a></li>
+					<li class='ftr_list_item my-1'><a class="ftr_list_link" href="/contactus/">Help 24x7</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<p class="mb-0 py-2 bg-black">Copyright © GrowSmo 2023</p>
 </footer>
 {% endblock footer_content%}
 
