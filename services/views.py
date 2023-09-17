@@ -143,13 +143,14 @@ def order_detail(request, category_slug, product_slug):
     category = ProductCategory.objects.filter(slug=category_slug).last()
     product = Product.objects.filter(slug=product_slug).last()
     order_id = request.GET.get('order_id', '')
+    if not request.user.is_authenticated():
+        return redirect("/")
     order = None
     if order_id:
         order = Order.objects.filter(pk=order_id).first()
 
     if request.method == 'POST':
         order_action = request.POST.get('order_action', '')
-        print("order_action", order_action)
         if order_action == 'confirm_payment':
             ref_id = request.POST.get('payment_reference_id', '')
             amount = request.POST.get('amount_paid', None)
