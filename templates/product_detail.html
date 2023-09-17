@@ -33,7 +33,13 @@
             </div>
           </div>
           <p class="product_price mt-4 mb-2">Total Price - Rs.<span id="total_price">{{starting_price}}</span></p>
-          <button type="button btn-sm" onclick="redirect_to_order_detail()" class="btn btn-success mb-4 btn-sm">Proceed to Payment</button>
+          <button type="button btn-sm" class="btn btn-success mb-4 btn-sm"
+          {% if user.is_authenticated %}
+            onclick="redirect_to_order_detail()"
+          {% else %}
+            data-bs-toggle="modal" data-bs-target="#loginmodal">
+          {% endif %}
+          Proceed to Payment</button>
           <h5 class="mb-2">Description</h5>
           <p class="product_desc">{{product.web_description|safe}}</p>
 

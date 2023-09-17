@@ -137,3 +137,7 @@ footer{
     width: fit-content;
     border-bottom: 3px solid #689c8d;
 }
+.switch_auth_model{
+    cursor: pointer;
+    text-decoration: none;
+}
