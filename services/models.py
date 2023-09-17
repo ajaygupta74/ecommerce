@@ -187,6 +187,8 @@ class Order(models.Model):
         related_name='order_items')
     slug = models.CharField(max_length=255, null=True, default=None)
     payment_done = models.BooleanField(default=False)
+    payment_reference_id = models.CharField(
+        max_length=255, null=True, blank=True)
     status = models.CharField(
         choices=Status.choices, default=Status.INITIATED,
         max_length=1)

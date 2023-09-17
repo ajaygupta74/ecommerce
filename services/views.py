@@ -1,9 +1,11 @@
+from datetime import datetime, timezone
 import logging
 from django.db.models import F, Min, Max
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views import generic
 from project2 import messages
+from project2.slack import send_slack_notification
 
 from services.models import (
     Product,
@@ -144,7 +146,37 @@ def order_detail(request, category_slug, product_slug):
     order = None
     if order_id:
         order = Order.objects.filter(pk=order_id).first()
+
     if request.method == 'POST':
+        order_action = request.POST.get('order_action', '')
+        print("order_action", order_action)
+        if order_action == 'confirm_payment':
+            ref_id = request.POST.get('payment_reference_id', '')
+            amount = request.POST.get('amount_paid', None)
+            user_message = request.POST.get('user_message', '')
+            if order and amount and ref_id:
+                order.order_price = float(amount)
+                order.payment_reference_id = ref_id
+                order.status = Order.Status.IN_PROGRESS
+                order.sub_status = Order.SubStatus.IN_PROGRESS
+                order.payment_json.update({'user_message': user_message})
+                order.save(update_fields=['order_price',
+                                          'payment_reference_id',
+                                          'status',
+                                          'sub_status',
+                                          'payment_json'])
+                current_time = datetime.utcnow().replace(tzinfo=timezone.utc)
+                order_time = datetime.strftime(current_time, "%d-%m-%Y %H:%M")
+                sl_message = messages.ORDER_PURCHASED_MSG.format(
+                    USER=order.user,
+                    PRODUCT=order.product,
+                    AMOUNT=order.order_price,
+                    TIME=order_time,
+                    ORDER=order.pk,
+                    PAY_REF_ID=order.payment_reference_id)
+                send_slack_notification('order-purchased', sl_message)
+                return redirect('/profile/')
+
         attr_id = request.POST.get('attr_id', '')
         order_price = request.POST.get('order_price', '')
         product_attribute = None
@@ -172,6 +204,29 @@ def order_detail(request, category_slug, product_slug):
         'product': product,
         'category': category,
         'order': order,
-        'input_instructions': messages.PURCHASE_INPUT_INSTRUCTIONS
     }
     return render(request, template_name, context)
+
+
+# def confirm_order_payment(request):
+#     if request.method == 'POST':
+#         ref_id = request.POST.get('payment_reference_id', '')
+#         order_id = request.POST.get('order_id', None)
+#         amount = request.POST.get('amount_paid', None)
+#         user_message = request.POST.get('user_message', '')
+#         order = None
+#         if order_id:
+#             order = Order.objects.filter(pk=order_id).first()
+#         if order and amount and ref_id:
+#             order.order_price = float(amount)
+#             order.payment_reference_id = ref_id
+#             order.status = Order.Status.IN_PROGRESS
+#             order.sub_status = Order.SubStatus.IN_PROGRESS
+#             order.payment_json.update({'user_message': user_message})
+#             order.save(update_fields=['order_price',
+#                                       'payment_reference_id',
+#                                       'status',
+#                                       'sub_status',
+#                                       'payment_json'])
+#             return redirect('/profile/')
+#     return redirect('/')
