@@ -1,8 +1,7 @@
 from datetime import datetime, timezone
 import logging
-from django.db.models import F, Min, Max
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import redirect, render
 from django.views import generic
 from project2 import messages
 from project2.slack import send_slack_notification
@@ -143,7 +142,7 @@ def order_detail(request, category_slug, product_slug):
     category = ProductCategory.objects.filter(slug=category_slug).last()
     product = Product.objects.filter(slug=product_slug).last()
     order_id = request.GET.get('order_id', '')
-    if not request.user.is_authenticated():
+    if not request.user.anonymous:
         return redirect("/")
     order = None
     if order_id:
@@ -207,27 +206,3 @@ def order_detail(request, category_slug, product_slug):
         'order': order,
     }
     return render(request, template_name, context)
-
-
-# def confirm_order_payment(request):
-#     if request.method == 'POST':
-#         ref_id = request.POST.get('payment_reference_id', '')
-#         order_id = request.POST.get('order_id', None)
-#         amount = request.POST.get('amount_paid', None)
-#         user_message = request.POST.get('user_message', '')
-#         order = None
-#         if order_id:
-#             order = Order.objects.filter(pk=order_id).first()
-#         if order and amount and ref_id:
-#             order.order_price = float(amount)
-#             order.payment_reference_id = ref_id
-#             order.status = Order.Status.IN_PROGRESS
-#             order.sub_status = Order.SubStatus.IN_PROGRESS
-#             order.payment_json.update({'user_message': user_message})
-#             order.save(update_fields=['order_price',
-#                                       'payment_reference_id',
-#                                       'status',
-#                                       'sub_status',
-#                                       'payment_json'])
-#             return redirect('/profile/')
-#     return redirect('/')
