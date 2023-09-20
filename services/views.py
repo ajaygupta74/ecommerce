@@ -142,8 +142,6 @@ def order_detail(request, category_slug, product_slug):
     category = ProductCategory.objects.filter(slug=category_slug).last()
     product = Product.objects.filter(slug=product_slug).last()
     order_id = request.GET.get('order_id', '')
-    if not request.user.anonymous:
-        return redirect("/")
     order = None
     if order_id:
         order = Order.objects.filter(pk=order_id).first()
