@@ -5,6 +5,7 @@ from django.shortcuts import redirect, render
 from django.views import generic
 from project2 import messages
 from project2.slack import send_slack_notification
+from services.helpers import generate_qr_code
 
 from services.models import (
     Product,
@@ -145,6 +146,7 @@ def order_detail(request, category_slug, product_slug):
     order = None
     if order_id:
         order = Order.objects.filter(pk=order_id).first()
+        generate_qr_code(order)
 
     if request.method == 'POST':
         order_action = request.POST.get('order_action', '')

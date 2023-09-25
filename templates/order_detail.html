@@ -57,7 +57,7 @@
             </div>
             {% else %}
             <div class="row">
-                <img class="product_image col-4 mb-1" src='{% static "/img/qrcode.png" %}' alt="Payment QR Code">
+                <img class="product_image col-4 mb-1" src='{{order.qr_code.url}}' alt="Payment QR Code">
             </div>
             <form class="row  mb-4 mt-0 g-3" method="POST">
                 {% csrf_token %}
