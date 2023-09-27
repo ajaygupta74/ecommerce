@@ -93,10 +93,14 @@ class Product(models.Model):
         super(Product, self).save(*args, **kwargs)
 
     def min_price(self):
-        return 10
+        min_attr = ProductAttribute.objects.filter(
+            product_id=self.id).order_by('price').first()
+        return min_attr.price
 
     def max_price(self):
-        return 100
+        max_attr = ProductAttribute.objects.filter(
+            product_id=self.id).order_by('-price').first()
+        return max_attr.price
 
 
 class ProductAttribute(models.Model):
