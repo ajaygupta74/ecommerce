@@ -95,12 +95,12 @@ class Product(models.Model):
     def min_price(self):
         min_attr = ProductAttribute.objects.filter(
             product_id=self.id).order_by('price').first()
-        return min_attr.price
+        return min_attr.offer_price
 
     def max_price(self):
         max_attr = ProductAttribute.objects.filter(
             product_id=self.id).order_by('-price').first()
-        return max_attr.price
+        return max_attr.offer_price
 
 
 class ProductAttribute(models.Model):
