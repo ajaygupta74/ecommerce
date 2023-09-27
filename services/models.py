@@ -49,7 +49,7 @@ class ProductSubCategory(models.Model):
             last_category = ProductSubCategory.objects.last()
             self.priority = last_category.id + 1 if last_category else 1
         if self.slug is None:
-            self.slug = slugify(self.title)
+            self.slug = slugify(f"{self.title}{self.category.title}")
         super(ProductSubCategory, self).save(*args, **kwargs)
 
 
