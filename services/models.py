@@ -92,15 +92,10 @@ class Product(models.Model):
             self.slug = slugify(self.title)
         super(Product, self).save(*args, **kwargs)
 
-    def min_price(self):
+    def low_attr(self):
         min_attr = ProductAttribute.objects.filter(
             product_id=self.id).order_by('price').first()
-        return min_attr.offer_price
-
-    def max_price(self):
-        max_attr = ProductAttribute.objects.filter(
-            product_id=self.id).order_by('-price').first()
-        return max_attr.offer_price
+        return min_attr
 
 
 class ProductAttribute(models.Model):

@@ -13,8 +13,13 @@
                     <div class="product_content col-9">
                         <h5 class="product_title" style="color: #006EFD;">{{product.title}}</h5>
                         {% comment %} <p class="product_desc mb-2">{{product.web_description|safe|truncatewords:15}}</p> {% endcomment %}
-                        <p class="product_price mb-0" style="font-weight: 500; color: green;">Price - Rs.{{product.min_price}}
-                            {% if product.max_price > product.min_price %}<del>Rs.{{product.max_price}}</del>{% endif %}</p>
+                        <p class="product_price mb-0">
+                            <span style="color: gray;">Price - </span>
+                            <span style="font-size: 1.3em; font-weight: 500; color: green;">Rs.{{product.low_attr.offer_price}}</span>
+                            {% if product.low_attr.price > product.low_attr.offer_price %}
+                            <span style="color: gray;"><del>Rs.{{product.low_attr.price}}</del></span>
+                            {% endif %}
+                        </p>
                         <p class="product_purchase mb-0 text-muted">Likes - {{product.likes}}<br>Dislikes - {{product.dislikes}}</p>
                     </div>
                 </div>
