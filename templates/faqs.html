@@ -7,13 +7,19 @@
                 <h2>Frequently Asked Questions</h2>
                 <div class="accordion" id="accordionExample">
                     {% for faq_item in faqs %}
-                        <div class="accordion-item">
+                        <div class="accordion-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
                             <p class="accordion-header" id="heading{{forloop.counter0}}">
-                            <button style="font-weight: 500;" class="accordion-button {% ifequal 0 forloop.counter0 %} {% else %} collapsed {% endifequal %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseheading{{forloop.counter0}}" aria-expanded="{% ifequal 0 forloop.counter0%} true {% else %} false {%endifequal%}" aria-controls="collapseheading{{forloop.counter0}}" aria-controls="collapseheading{{forloop.counter0}}">
+                            <button style="font-weight: 500;" class="accordion-button 
+                                {% ifequal 0 forloop.counter0 %} {% else %} collapsed {% endifequal %}" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapseheading{{forloop.counter0}}"
+                                aria-expanded="{% ifequal 0 forloop.counter0%} true {% else %} false {%endifequal%}"
+                                aria-controls="collapseheading{{forloop.counter0}}" aria-controls="collapseheading{{forloop.counter0}}">
                                 {{ faq_item.question }}
                             </button>
                             </p>
-                            <div id="collapseheading{{forloop.counter0}}" class="accordion-collapse collapse {% ifequal 0 forloop.counter0 %} show {% endifequal %}" aria-labelledby="heading{{forloop.counter0}}" data-bs-parent="#accordionExample">
+                            <div id="collapseheading{{forloop.counter0}}" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"
+                            class="accordion-collapse collapse {% ifequal 0 forloop.counter0 %} show {% endifequal %}"
+                            aria-labelledby="heading{{forloop.counter0}}" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     {{ faq_item.answer | safe }}
                                 </div>
@@ -33,14 +39,16 @@
                 <h4> Satatic FAQ--Frequently Asked Questions</h4>
                 <div class="accordion" id="accordionExample">
                     {% for key, value in static_faqs.items %}
-                        <div class="accordion-item">
+                        <div class="accordion-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
                             <p class="accordion-header" id="{{key}}">
                             <button style="font-weight: 500;" class="accordion-button {% if key == 'first' %} {% else %} collapsed {% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{key}}" aria-expanded="{%if key == 'first'%} true {% else %} false {%endif%}" aria-controls="collapse{{key}}" aria-controls="collapse{{key}}">
                                 {{ value.question }}
                             </button>
                             </p>
-                            <div id="collapse{{key}}" class="accordion-collapse collapse {% if key == 'first' %} show {% endif %}" aria-labelledby="{{key}}" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
+                            <div id="collapse{{key}}" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"
+                                class="accordion-collapse collapse {% if key == 'first' %} show {% endif %}" aria-labelledby="{{key}}"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
                                 {{ value.answer | safe }}
                             </div>
                             </div>
