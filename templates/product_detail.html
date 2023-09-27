@@ -32,7 +32,7 @@
             {% endfor %}
             </div>
           </div>
-          <p class="product_price mt-4 mb-3">Total Price - <span id="total_price" style="font-size: 1.3em; font-weight: 500;">Rs.{{starting_price}}</span></p>
+          <p class="product_price mt-4 mb-3">Total Price - <span style="font-size: 1.3em; font-weight: 500;">Rs.<span id="total_price">{{starting_price}}</span></span></p>
           <button type="button" class="btn btn-success mb-4" {% if user.is_authenticated %} onclick="redirect_to_order_detail()"
             {% else %} data-bs-toggle="modal" data-bs-target="#loginmodal" {% endif %}>Proceed to Payment</button>
           <h5 class="mb-2">Description</h5>
