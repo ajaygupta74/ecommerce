@@ -1,10 +1,11 @@
 from datetime import datetime, timezone
 import qrcode
 from io import BytesIO
+from django.conf import settings
 
 
 def generate_qr_code(order):
-    UPI_ID = 'saurabh.058@paytm'
+    UPI_ID = settings.PAYMENT_UPI_ID
     BUSINESS_TITLE = 'Growsmo'
     ORDER_TITLE = f"Payment for order - {order.slug}"
     ORDER_MESSAGE = f"{order.pk} by {order.user}"

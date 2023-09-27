@@ -128,7 +128,7 @@ class ProductDetailView(generic.DetailView):
         product_reviews = ProductReview.objects.filter(
             product=product).order_by('-review_time', '-reply_time')
         min_price_product_attr = ProductAttribute.objects.filter(
-                product=product).order_by('offer_price').first()
+            product=product).order_by('offer_price').first()
         context.update({
             'product': product,
             'product_attributes': product_attributes,
@@ -146,22 +146,21 @@ def order_detail(request, category_slug, product_slug):
     order = None
     if order_id:
         order = Order.objects.filter(pk=order_id).first()
-        generate_qr_code(order)
+        if not order.qr_code:
+            generate_qr_code(order)
 
     if request.method == 'POST':
         order_action = request.POST.get('order_action', '')
         if order_action == 'confirm_payment':
-            ref_id = request.POST.get('payment_reference_id', '')
-            amount = request.POST.get('amount_paid', None)
+            user_input_text = request.POST.get('user_input_text', '')
             user_message = request.POST.get('user_message', '')
-            if order and amount and ref_id:
-                order.order_price = float(amount)
-                order.payment_reference_id = ref_id
+            if order and user_input_text:
                 order.status = Order.Status.IN_PROGRESS
                 order.sub_status = Order.SubStatus.IN_PROGRESS
-                order.payment_json.update({'user_message': user_message})
+                order.payment_json.update({
+                    'user_input_text': user_input_text,
+                    'user_message': user_message})
                 order.save(update_fields=['order_price',
-                                          'payment_reference_id',
                                           'status',
                                           'sub_status',
                                           'payment_json'])
@@ -172,8 +171,9 @@ def order_detail(request, category_slug, product_slug):
                     PRODUCT=order.product,
                     AMOUNT=order.order_price,
                     TIME=order_time,
-                    ORDER=order.pk,
-                    PAY_REF_ID=order.payment_reference_id)
+                    ORDER_ID=order.pk,
+                    ORDER_SLUG=order.slug,
+                    USER_INPUT_TEXT=order.payment_json.get('user_input_text'))
                 send_slack_notification('order-purchased', sl_message)
                 return redirect('/profile/')
 

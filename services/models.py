@@ -66,6 +66,8 @@ class Product(models.Model):
     sub_category = models.ForeignKey(
         ProductSubCategory, on_delete=models.CASCADE,
         related_name='products', null=True, blank=True)
+    user_input_text = models.CharField(
+        max_length=255, null=True, blank=True)
     web_description = RichTextField(
         config_name='awesome_ckeditor', null=True, blank=True)
     priority = models.PositiveIntegerField(null=True, blank=True)
@@ -187,8 +189,6 @@ class Order(models.Model):
         related_name='order_items')
     slug = models.CharField(max_length=255, null=True, default=None)
     payment_done = models.BooleanField(default=False)
-    payment_reference_id = models.CharField(
-        max_length=255, null=True, blank=True)
     status = models.CharField(
         choices=Status.choices, default=Status.INITIATED,
         max_length=1)

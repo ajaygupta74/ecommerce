@@ -27,7 +27,7 @@
             <p class="card-text mb-2"><small class="text-muted">Email : &nbsp;&nbsp;{{user.email}}</small></p> {% endcomment %}
             {% if order.sub_status == 'i' %} <!-- Order initiated payment not done -->
             <div class="card-text mt-2 mb-4">
-                <h5 class="card-title">Instructions</h5>
+                <h5 class="card-title mt-4">Instructions</h5>
                 <p class="card-text mb-1"><small class="text-muted">
                     Currently Growsmo is verifying the payments manually. For that we required the <b>Payment ReferenceId</b> and the <b>Amount Paid</b> by you.
                     In this process we need atleast 4 to 5 working hours. If you need any help or any query, please contact us in help 
@@ -42,7 +42,7 @@
             {% if order.sub_status != 'i' %}
             <div class="row my-4">
                 <div class="mb-0">
-                    Payment ReferenceId : {{order.payment_reference_id}}<br>
+                    Your account reference : {{order.payment_json.user_input_text}}<br>
                     {% if order.payment_json.user_message %}
                     <b>Your message</b> : <br> {{order.payment_json.user_message}}
                     {% endif %}
@@ -57,117 +57,34 @@
             </div>
             {% else %}
             <div class="row">
-                <img class="product_image col-4 mb-1" src='{{order.qr_code.url}}' alt="Payment QR Code">
+                <img class="product_image col-sm-12 col-md-9 col-lg-6 mb-1" src='{{order.qr_code.url}}' alt="Payment QR Code">
             </div>
             <form class="row  mb-4 mt-0 g-3" method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="order_action" value="confirm_payment">
                 <div class="input-group mb-1">
-                    <span class="input-group-text" id="pay_ref_id">Payment ReferenceId*</span>
-                    <input type="text" class="form-control" id="pay_ref_id" name="payment_reference_id" aria-describedby="pay_ref_id" required>
+                    {% comment %} <span class="input-group-text" id="user_input_text">Payment ReferenceId*</span> {% endcomment %}
+                    <input type="text" class="form-control" id="user_input_text" 
+                    placeholder="{% if order.product.user_input_text %}{{order.product.user_input_text}}{% else %}Provide any reference to your account{% endif %}"
+                    name="user_input_text" aria-describedby="user_input_text" required>
                 </div>
-                <div class="input-group mb-1">
+                {% comment %} <div class="input-group mb-1">
                     <span class="input-group-text" id="amount_paid">Amount Paid in Rs.*</span>
                     <input type="number" class="form-control" id="amount_paid" name="amount_paid" aria-describedby="amount_paid" required>
-                </div>
+                </div> {% endcomment %}
                 <div class="mb-0">
                     <textarea class="form-control" id="user_message" name="user_message"
                     placeholder="Any message to Growsmo" rows="5"></textarea>
                 </div> 
                 <p class="text-muted danger" style="display: none;" id="input_error"><p>
                 <div class="col-12 d-grid gap-2">
-                    <button type="submit" class="btn btn-primary">Confirm</button>
+                    <button type="submit" class="btn btn-primary">Confirm Payment</button>
                 </div>
             </form>
             {% endif %}
         </div>
     </div>
 
-
-    <!--div class="row">
-        <div class="col-sm-12 col-md-6 col-lg-6">
-            <div class="mb-3 mt-sm-3 mt-md-4 mt-lg-4">
-                <div class="product_card">
-                    <div class="product_image col-3">
-                    <img src="{{product.icon.url}}" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="product_content col-9">
-                        <h5 class="product_title mb-1">{{product.title}}</h5>
-                        {{order_data}}
-                        <p class="card-text mb-1"><small class="text-muted">{{category.title}}</small></p>
-                        <p class="card-text mb-1"><small class="text-muted">Qty : {{order.payment_json.value}}</small></p>
-                        {% comment %} <p class="card-text mb-1"><small class="text-muted">{{order.payment_json}}</small></p> {% endcomment %}
-                        <p class="card-text mb-1"><small class="text-muted">Rs.{{order.order_price}}</small></p>
-                        <p class="product_desc mb-2">{{product.web_description|safe|truncatewords:15}}</p>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-
-        <div class="col-sm-12 col-md-6 col-lg-6">
-            <div class="card mb-4 mt-sm-3 mt-md-4 mt-lg-4 border-0">
-                <h5 class="card-title">Personal Details -</h5>
-                <p class="card-text mb-1"><small class="text-muted">Name : &nbsp;&nbsp;{{user.first_name}} {{user.last_name}}</small></p>
-                <p class="card-text mb-1"><small class="text-muted">Phone : &nbsp;&nbsp;{{user.phone_number}}</small></p>
-                <p class="card-text mb-1"><small class="text-muted">Email : &nbsp;&nbsp;{{user.email}}</small></p>
-            </div>
-            {% if order.payment_done %}
-            <div class="row">
-                <div class="mb-0">
-                    Your message : <br> {{order.payment_json.user_message}}
-                </div> 
-                <div class="col-12 d-grid gap-2">
-                    Order successfull
-                </div>
-            </div>
-            {% else %}
-            <form class="row g-3">
-                <div class="mb-0">
-                    <label for="exampleFormControlTextarea1" class="form-label">Enter your message</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1"
-                    placeholder="{{input_instructions}}" rows="5" required></textarea>
-                </div> 
-                <div class="col-12 d-grid gap-2">
-                    <button type="submit" class="btn btn-primary">Proceed to payment</button>
-                </div>
-            </form>
-            {% endif %}
-        </div>
-    </div -->
 </div>
 
-{% comment %} <script>
-    function confirm_order_payment(order_id){
-        var pay_ref = $('#pay_ref_id').val()
-        var amount_paid = $('#amount_paid').val()
-        var user_message = $('#user_message').val()
-        if (pay_ref === '' || amount_paid === ''){
-            document.getElementById('input_error').innerText = "Please fill all required fields"
-            document.getElementById('input_error').style.display = "block"
-        } else {
-            var csrf_token = '{{csrf_token}}';
-            console.log("i am here")
-            $.ajax({
-                type: 'POST',
-                url: '{% url "order_deatil" %}',
-                data: {
-                    order_id: order_id,
-                    payment_reference_id: pay_ref,
-                    amount_paid: amount_paid,
-                    user_message: user_message,
-                },
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader('X-CSRFToken', csrf_token);
-                },
-                success: function(data) {
-                    window.location.href = '{% url "user_detail" %}';
-                }
-            });
-        }
-    }
-</script> {% endcomment %}
-
 {% endblock main_content %}
-
-send_mail("Subject here", "Here is the message.", "ajaygupta14801@gmail.com", ["akgupta14801@gmail.com"], fail_silently=False,)

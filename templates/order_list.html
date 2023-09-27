@@ -19,7 +19,7 @@
                                         <img src="{{order.product.icon.url}}" class="img-fluid rounded-start" alt="..."></a>
                                     </div>
                                     <div class="product_content col-9">
-                                        <h5 class="product_title" style="color: violet;">
+                                        <h5 class="product_title" style="color: #006EFD;">
                                             <a href="{% url 'product_detail' order.product.category.slug order.product.slug %}" class="product_item_link text-decoration-none">
                                             {{order.product.title}}</a></h5>
                                         {% comment %} <p class="product_desc mb-2">{{order.product.web_description|safe|truncatewords:15}}</p> {% endcomment %}
