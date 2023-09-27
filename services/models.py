@@ -42,7 +42,7 @@ class ProductSubCategory(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title
+        return f"{self.title} - {self.category.title}"
 
     def save(self, *args, **kwargs):
         if self.priority is None:
