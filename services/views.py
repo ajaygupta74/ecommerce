@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 
 
 class HomeView(generic.TemplateView):
-    template_name = 'home.html'
+    template_name = 'services/home.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -80,7 +80,7 @@ class HomeView(generic.TemplateView):
 
 class CategoryDetailView(generic.DetailView):
     model = ProductCategory
-    template_name = 'home.html'
+    template_name = 'services/home.html'
     queryset = ProductCategory.objects.filter(is_active=True)
     product_queryset = Product.objects.filter(is_active=True)
 
@@ -114,12 +114,12 @@ class CategoryDetailView(generic.DetailView):
             product_list = product_list.filter(
                 sub_category__slug=sel_sub_cat)
         context = {'product_list': product_list}
-        return render(request, 'product_list.html', context)
+        return render(request, 'services/product_list.html', context)
 
 
 class ProductDetailView(generic.DetailView):
     model = Product
-    template_name = "product_detail.html"
+    template_name = "services/product_detail.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -140,7 +140,7 @@ class ProductDetailView(generic.DetailView):
 
 
 def order_detail(request, category_slug, product_slug):
-    template_name = 'order_detail.html'
+    template_name = 'services/order_detail.html'
     category = ProductCategory.objects.filter(slug=category_slug).last()
     product = Product.objects.filter(slug=product_slug).last()
     order_id = request.GET.get('order_id', '')
