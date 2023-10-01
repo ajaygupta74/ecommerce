@@ -6,6 +6,7 @@ from django.views import generic
 from project2 import messages
 from project2.slack import send_slack_notification
 from services.helpers import generate_qr_code
+from django.core.files.storage import default_storage
 
 from services.models import (
     Product,
@@ -146,8 +147,9 @@ def order_detail(request, category_slug, product_slug):
     order = None
     if order_id:
         order = Order.objects.filter(pk=order_id).first()
-        if not order.qr_code:
-            generate_qr_code(order)
+        if order.qr_code:
+            default_storage.delete(order.qr_code.name)
+        generate_qr_code(order)
 
     if request.method == 'POST':
         order_action = request.POST.get('order_action', '')
