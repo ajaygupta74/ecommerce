@@ -11,7 +11,7 @@ django-phonenumber-field==4.0.0
 djangorestframework==3.11.1
 idna==3.4
 phonenumbers==8.12.6
-Pillow==10.0.0
+Pillow==10.0.1
 pytz==2023.3
 requests==2.31.0
 six==1.16.0
