@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'sorl.thumbnail',
     'rest_framework',
+    'blogs',
     'services',
     'payments',
     'users',
