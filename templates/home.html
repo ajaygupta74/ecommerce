@@ -1,0 +1,335 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block main_content %}
+<section id="banner_section">
+    <div class="container p-3">
+        <div class="row m-0 px-3 rounded"  style="background-color: #ede3e3;">
+            <div id="banner_container" class="py-3">
+                <div class="col-8 pt-3">
+                    <div id="banner_content" style="margin: auto;">
+                        <h4>Welcome back</h4>
+                        <p class="w-75" >Visit Growsmo services and order now.<span class="d-none d-md-block text-muted" style="font-size:.9em;"><br>Our services encompass boosting your followers, likes, shares, views, and connections, strategically tailored to each platform's unique dynamics. We understand the power of a strong online presence, and we're here to help you harness it.</span></p>
+                        {% comment %} <a href="/services/" class="d-none btn btn-sm btn-secondary">Order Now</a> {% endcomment %}
+                    </div>
+                </div>
+                <div id="banner_image" class="col-4">
+                    <img class="img-fluid" src="{% static 'img/home_banner.png' %}">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="hero_card_section">
+    <div class="container my-3">
+        <div class="row d-flex flex-nowrap px-3">
+
+            <div class="col px-0 mx-2 text-center">
+                <a href="/services" class="text-decoration-none">
+                    <div class="card border-0 hero_section_col">
+                        <div class="home_card_image">
+                            <img class="image-fluid" src="{% static 'img/shopping_icon.png' %}" class="card-img-top" alt="...">
+                        </div>
+                        <div class="card-body text-center py-3 px-0" >
+                            <h5 class="card-title d-none d-lg-block">Services</h5>
+                            <p class="card-title d-lg-none">Services</p>
+                            <p class="card-text d-none px-2 d-lg-block">Our services encompass boosting your social acounts strategically</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        
+            <div class="col px-0 mx-2 text-center">
+                <a href="/blogs" class="text-decoration-none">
+                <div class="card border-0 hero_section_col">
+                        <div class="home_card_image">
+                            <img class="image-fluid" src="{% static 'img/blog_icon.png' %}" class="card-img-top" alt="...">
+                        </div>
+                        <div class="card-body text-center py-3 px-0" >
+                            <h5 class="card-title d-none d-lg-block">Read Blogs</h5>
+                            <p class="card-title d-lg-none">Read Blogs</p>
+                            <p class="card-text d-none px-2 d-lg-block">Visit Growsmo blog and Read latest bogs and know more about many things</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            {% if user.is_authenticated %}
+            <div class="col px-0 mx-2 text-center">
+                <a href="{% url 'user_detail'%}"  class="text-decoration-none">
+                <div class="card border-0 hero_section_col">
+                        <div class="home_card_image">
+                            <img class="image-fluid" src="{% static 'img/join_us_icon.png' %}" class="card-img-top" alt="...">
+                        </div>
+                        <div class="card-body text-center py-3 px-0" >
+                            <h5 class="card-title d-none d-lg-block">My Profile</h5>
+                            <p class="card-title d-lg-none">My Profile</p>
+                            <p class="card-text d-none px-2 d-lg-block">Continue your jouney where you left in previous visit</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% else %}
+            <div class="col px-0 mx-2 text-center">
+                <a href=""  class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#signupmodal">
+                <div class="card border-0 hero_section_col">
+                        <div class="home_card_image">
+                            <img class="image-fluid" src="{% static 'img/join_us_icon.png' %}" class="card-img-top" alt="...">
+                        </div>
+                        <div class="card-body text-center py-3 px-0" >
+                            <h5 class="card-title d-none d-lg-block">Join us Now</h5>
+                            <p class="card-title d-lg-none">Join us Now</p>
+                            <p class="card-text d-none px-2 d-lg-block">Join us today and enjoy Growsmo's provided services</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endif %}
+
+            <div class="col px-0 mx-2 text-center">
+                <a href="/contactus" class="text-decoration-none">
+                <div class="card border-0 hero_section_col">
+                        <div class="home_card_image">
+                            <img class="image-fluid" src="{% static 'img/help_icon.png' %}" class="card-img-top" alt="...">
+                        </div>
+                        <div class="card-body text-center py-3 px-0" >
+                            <h5 class="card-title d-none d-lg-block">24x7 Help</h5>
+                            <p class="card-title d-lg-none">24x7 Help</p>
+                            <p class="card-text d-none px-2 d-lg-block">Support for our customers id our first priority, Contact now</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>  
+    </div>
+</section>
+
+<section id="home_category_list">
+    <div class="container p-3 mb-4">
+        <div class="mb-3 sec_heading">
+            <div class="sec_heading_text text-center">
+                <h4>Available Categories</h4>
+                <p class="text-muted">Explore more categories, visit services now</p>
+            </div>
+        </div>
+
+        <div class="col-md-12 text-center">
+            <ul class="category_list">
+                    
+                <li class="category_item p-2 m-2">
+                    <a href="/services/instagram-services/" class="text-decoration-none text-dark">
+                        <div class="home_category_item">
+                            <div class="category_image">
+                                <img src="{% static 'img/instagram_icon.png' %}" class="img-fluid" alt="instagram">
+                            </div>
+                            <div class="category_name">
+                                <div class="card-body">
+                                    <p class="card-text px-2">Views</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                    
+                <li class="category_item p-2 m-2">
+                    <a href="/services/instagram-services/" class="text-decoration-none text-dark">
+                        <div class="home_category_item">
+                            <div class="category_image">
+                                <img src="{% static 'img/instagram_icon.png' %}" class="img-fluid" alt="...">
+                            </div>
+                            <div class="category_name">
+                                <div class="card-body">
+                                    <p class="card-text px-2">Like</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="category_item p-2 m-2">
+                    <a href="/services/instagram-services/" class="text-decoration-none text-dark">
+                        <div class="home_category_item">
+                            <div class="category_image">
+                                <img src="{% static 'img/instagram_icon.png' %}" class="img-fluid" alt="...">
+                            </div>
+                            <div class="category_name">
+                                <div class="card-body">
+                                    <p class="card-text px-2">Followers</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="category_item p-2 m-2">
+                    <a href="/services/facebook-services/" class="text-decoration-none text-dark">
+                        <div class="home_category_item">
+                            <div class="category_image">
+                                <img src="{% static 'img/facebook_icon.png' %}" class="img-fluid" alt="...">
+                            </div>
+                            <div class="category_name">
+                                <div class="card-body">
+                                    <p class="card-text px-2">Like</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                    
+                <li class="category_item p-2 m-2">
+                    <a href="/services/facebook-services/" class="text-decoration-none text-dark">
+                        <div class="home_category_item">
+                            <div class="category_image">
+                                <img src="{% static 'img/facebook_icon.png' %}" class="img-fluid" alt="...">
+                            </div>
+                            <div class="category_name">
+                                <div class="card-body">
+                                    <p class="card-text px-2">Views</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                    
+                <li class="category_item p-2 m-2">
+                    <a href="/services/facebook-services/" class="text-decoration-none text-dark">
+                        <div class="home_category_item">
+                            <div class="category_image">
+                                <img src="{% static 'img/facebook_icon.png' %}" class="img-fluid" alt="...">
+                            </div>
+                            <div class="category_name">
+                                <div class="card-body">
+                                    <p class="card-text px-2">Followers</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="category_item p-2 m-2">
+                    <a href="/services/facebook-services/" class="text-decoration-none text-dark">
+                        <div class="home_category_item">
+                            <div class="category_image">
+                                <img src="{% static 'img/facebook_icon.png' %}" class="img-fluid" alt="...">
+                            </div>
+                            <div class="category_name">
+                                <div class="card-body">
+                                    <p class="card-text px-2">Monetize</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="category_item p-2 m-2">
+                    <a href="/services/youtube-services/" class="text-decoration-none text-dark">
+                        <div class="home_category_item">
+                            <div class="category_image">
+                                <img src="{% static 'img/youtube_icon.png' %}" class="img-fluid" alt="...">
+                            </div>
+                            <div class="category_name">
+                                <div class="card-body">
+                                    <p class="card-text px-2">Like</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="category_item p-2 m-2">
+                    <a href="/services/youtube-services/" class="text-decoration-none text-dark">
+                        <div class="home_category_item">
+                            <div class="category_image">
+                                <img src="{% static 'img/youtube_icon.png' %}" class="img-fluid" alt="...">
+                            </div>
+                            <div class="category_name">
+                                <div class="card-body">
+                                    <p class="card-text px-2">Views</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+
+                </ul>
+            </div>
+
+            <div class="sec_heading_link text-center">
+                <a href="/services" class="btn btn-sm btn-secondary">View All</a>
+            </div>
+    </div>
+</section>
+
+<section id="home_full_width_strip">
+    <div class="container py-2">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-3">
+                <div class="card border-0 text-center fullstripitem">
+                    <div class="card-body">
+                        <h5 class="card-title">500+ Services</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Mission towards 1k above</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="card border-0 text-center fullstripitem">
+                    <div class="card-body">
+                        <h5 class="card-title">16k+ Customers</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Total Customers</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="card border-0 text-center fullstripitem">
+                    <div class="card-body">
+                        <h5 class="card-title">4.9 Star Rating</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Rating from all Customers</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="home_latest_blogs">
+    <div class="container p-3 mt-4">
+
+        <div class="mb-3 sec_heading">
+            <div class="sec_heading_text text-center">
+                <h4>Recent blogs</h4>
+                <p class="text-muted">Read more published blogs by Growsmo</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            {% for blog in lateg_blogs %}    
+            <div class="col-lg-6 col-md-12 mb-4 col-sm-12">
+                <div class="blog_container">
+                    <div class="blog_image d-none d-sm-block">
+                        <img src="{{blog.thumbnail.url}}" class="img-fluid rounded-start" alt="{{blog.title}}">
+                    </div>
+                    <div class="blog_content">
+                        <h5><a id="blog_title" href="{% url 'blog_detail' blog.slug %}">{{blog.title}}</a></h5>
+                        <p class="mb-2"><small class="text-muted">Last updated {{blog.updated_at}}</small></p>
+                        <p class="mb-0" style="color: #5e5e5a;">{{blog.short_content|slice:":150"|safe}}...</p>
+                        <a href="{% url 'blog_detail' blog.slug %}">Read more</a>
+                    </div>
+                </div>
+            </div>   
+            {% endfor %} 
+            
+        </div>
+
+        <div class="sec_heading_link text-center mt-3">
+            <a href="/blogs" class="btn btn-sm btn-secondary">View All</a>
+        </div>
+    </div>
+</scetion>
+
+<section id="home_faqs">
+    {% include 'faqs.html' %}
+</scetion>
+
+
+{% endblock main_content %}

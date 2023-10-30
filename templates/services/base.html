@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Growsmo | Services{% endblock title %}
+
+{% block header_content %}
+{% include 'navbar1.html' %}
+{% include 'navbar2.html' %}
+{% endblock header_content %}
+
+{% block footer_recommendation %}
+<div class="col-sm-12 col-md-4 col-lg-4 text-start">
+    <ul><h5 class="mb-3 ftr_heading py-3">Recommendation</h5>
+        <li class='ftr_list_item my-1'><a class="ftr_list_link" href="{% url 'category_detail' 'instagram'  %}">Instagram</a></li>
+        <li class='ftr_list_item my-1'><a class="ftr_list_link" href="{% url 'category_detail' 'facebook'  %}">Facebook</a></li>
+        <li class='ftr_list_item my-1'><a class="ftr_list_link" href="{% url 'category_detail' 'telegram'  %}">Telegram</a></li>
+        <li class='ftr_list_item my-1'><a class="ftr_list_link" href="{% url 'category_detail' 'youtube'  %}">Youtube</a></li>
+        <li class='ftr_list_item my-1'><a class="ftr_list_link" href="{% url 'category_detail' 'twitter'  %}">Twitter</a></li>
+    </ul>
+</div>
+{% endblock footer_recommendation %}
+		
+
+<script>
+function refresh_product_list(cat='', sub_cat=''){
+	var csrf_token = '{{csrf_token}}';
+	$.ajax({
+		type: 'POST',
+		url: `/services/${cat}/`,
+		data: { sel_sub_cat: sub_cat },
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader('X-CSRFToken', csrf_token);
+		},
+		success: function(data) {
+			document.getElementById("product_list").innerHTML = data
+		}
+	});
+}
+
+
+</script>

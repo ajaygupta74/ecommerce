@@ -143,7 +143,7 @@ class ProductImage(models.Model):
         Product, on_delete=models.CASCADE,
         null=True, related_name="images")
     image = ImageField(
-        upload_to='upload/images/product/product-images/')
+        upload_to='uploads/images/product/product-images/')
     is_approved = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -197,7 +197,7 @@ class Order(models.Model):
     order_price = models.DecimalField(
         null=True, decimal_places=2, max_digits=10)
     qr_code = models.FileField(null=True, blank=True,
-                               upload_to='orders/qr_code/')
+                               upload_to='uploads/qr_codes/orders/')
     payment_json = models.JSONField(blank=True, null=True)
     description = models.CharField(max_length=250, null=True, blank=True)
     status_timeline = models.JSONField(default=list)

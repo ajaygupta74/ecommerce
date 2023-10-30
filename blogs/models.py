@@ -26,6 +26,7 @@ class Blog(models.Model):
     slug = models.SlugField(max_length=200, unique=True, null=True, blank=True)
     thumbnail = models.ImageField(
         upload_to='uploads/images/blogs/', null=True, blank=True)
+    short_content = models.CharField(max_length=255)
     category = models.IntegerField(
         choices=BlogCategory.choices, default=BlogCategory.SERVICES)
     tags = models.ManyToManyField(

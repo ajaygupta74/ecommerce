@@ -1,0 +1,27 @@
+{% extends "blogs/base.html" %}
+{% load static %}
+
+{% block main_content %}
+
+<div class="container mb-5">
+    <section class="cta-section theme-bg-light py-5">
+        <div class="container text-center">
+            <h2 class="heading">Growsmo blogs</h2>
+            <div class="intro">Welcome to our blog. Read latest bogs and know more about many things</div>
+            <form class="form-inline pt-3" method="POST">
+                {% csrf_token %}
+                <div class="input-group mb-3">
+                    <input type="text" name="keyword" class="form-control" placeholder="Title or Keyword" aria-label="Title or Keyword" aria-describedby="basic-addon2">
+                    <span class="input-group-text" id="basic-addon2">Search</span>
+                </div>
+            </form>
+        </div>
+    </section>
+
+
+    {% block blog_list %}
+    {% include 'blogs/blog_list.html' %}
+    {% endblock blog_list %}
+</div>
+
+{% endblock main_content %}

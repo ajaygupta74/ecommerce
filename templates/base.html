@@ -5,7 +5,7 @@
     <title>{% block title %}Growsmo{% endblock title %}</title>
 	{% block meta_extend %}
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.8, shrink-to-fit=no" />
 	<meta name="author" content="" />
 	<meta name="theme-color" content="#ffcc33">
 	<link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}" />
@@ -30,9 +30,9 @@
 </head>
 
 <body>
-	{% block header_content %}
-	{% include 'navbar.html' %}
-	{% endblock header_content %}
+{% block header_content %}
+{% include 'navbar1.html' %}
+{% endblock header_content %}
 	
 {% include 'modals.html' %}
 {% block main_content %}
@@ -46,6 +46,7 @@
 			<div class="col-sm-12 col-md-4 col-lg-4 text-start">
 				<ul><h5 class="mb-3 ftr_heading py-3">Quick Links</h5>
 					<li class='ftr_list_item my-1'><a class="ftr_list_link" href="/">Home</a></li>
+					<li class='ftr_list_item my-1'><a class="ftr_list_link" href="/blogs">Blog</a></li>
 					{% if user.is_authenticated %}
 					<li class='ftr_list_item my-1'><a class="ftr_list_link" href="{% url 'user_detail'%}">Profile</a></li>
 					<li class='ftr_list_item my-1'><a class="ftr_list_link" href="{% url 'user_logout'%}">Logout</a></li>
@@ -56,15 +57,9 @@
 					{% endif %}
 				</ul>
 			</div>
-			<div class="col-sm-12 col-md-4 col-lg-4 text-start">
-				<ul><h5 class="mb-3 ftr_heading py-3">Recommendation</h5>
-					<li class='ftr_list_item my-1'><a class="ftr_list_link" href="{% url 'category_detail' 'instagram'  %}">Instagram</a></li>
-					<li class='ftr_list_item my-1'><a class="ftr_list_link" href="{% url 'category_detail' 'facebook'  %}">Facebook</a></li>
-					<li class='ftr_list_item my-1'><a class="ftr_list_link" href="{% url 'category_detail' 'telegram'  %}">Telegram</a></li>
-					<li class='ftr_list_item my-1'><a class="ftr_list_link" href="{% url 'category_detail' 'youtube'  %}">Youtube</a></li>
-					<li class='ftr_list_item my-1'><a class="ftr_list_link" href="{% url 'category_detail' 'twitter'  %}">Twitter</a></li>
-				</ul>
-			</div>
+			{% block footer_recommendation %}
+
+			{% endblock footer_recommendation %}
 			<div class="col-sm-12 col-md-4 col-lg-4 text-start">
 				<ul><h5 class="mb-3 ftr_heading py-3">Policies</h5>
 					<li class='ftr_list_item my-1'><a class="ftr_list_link" href="/terms-and-conditions/">Terms and condition</a></li>

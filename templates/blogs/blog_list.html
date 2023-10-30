@@ -1,0 +1,47 @@
+{% load static %}
+
+
+{% if blog_list %}
+    <div class="row">
+    {% for blog in blog_list %}
+
+            <div class="col-lg-6 col-md-12 mb-4 col-sm-12">
+                <div class="blog_container">
+                    <div class="blog_image d-none d-sm-block">
+                        <img src="{{blog.thumbnail.url}}" class="img-fluid rounded-start" alt="{{blog.title}}">
+                    </div>
+                    <div class="blog_content">
+                        <h5><a id="blog_title" href="{% url 'blog_detail' blog.slug %}">{{blog.title}}</a></h5>
+                        <p class="mb-2"><small class="text-muted">Last updated {{blog.updated_at}}</small></p>
+                        <p class="mb-0" style="color: #5e5e5a;">{{blog.short_content|slice:":150"|safe}}...</p>
+                        <a href="{% url 'blog_detail' blog.slug %}">Read more</a>
+                    </div>
+                </div>
+            </div>    
+
+    {% endfor %}
+
+</div>
+{% else %}
+
+<p class="text-center mb-5">{{ no_results_message }}</p>
+<h5 class="mb-4"> Recent blogs</h5>
+{% for blog in recent_blogs %}
+
+            <div class="col-lg-6 col-md-12 mb-4 col-sm-12">
+                <div class="blog_container">
+                    <div class="blog_image d-none d-sm-block">
+                        <img src="{{blog.thumbnail.url}}" class="img-fluid rounded-start" alt="{{blog.title}}">
+                    </div>
+                    <div class="blog_content">
+                        <h5><a id="blog_title" href="{% url 'blog_detail' blog.slug %}">{{blog.title}}</a></h5>
+                        <p class="mb-2"><small class="text-muted">Last updated {{blog.updated_at}}</small></p>
+                        <p class="mb-0" style="color: #5e5e5a;">{{blog.short_content|slice:":150"|safe}}...</p>
+                        <a href="{% url 'blog_detail' blog.slug %}">Read more</a>
+                    </div>
+                </div>
+            </div>            
+
+    {% endfor %}
+
+{% endif %}

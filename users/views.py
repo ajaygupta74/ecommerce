@@ -1,10 +1,69 @@
+from typing import Any
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from services.models import Order
 from django.contrib import messages
+from django.views import generic
+from blogs.models import Blog
 from django.contrib.auth import authenticate, login
 
 from users.models import User, UserQuery
+
+
+class GrowsmoHomeView(generic.TemplateView):
+    template_name = 'home.html'
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        latest_blogs = Blog.objects.filter(
+            status=Blog.Statuschoices.PUBLISH).order_by('-created_at')[:4]
+        context['lateg_blogs'] = latest_blogs
+        faqs = {
+            "first": {
+                "question": ("Is it safe to purchase services for"
+                             " various social media platforms?"),
+                "answer": ("Yes, our services prioritize security and"
+                           " authenticity, ensuring your profiles remain"
+                           " safe while you experience growth.")
+            },
+            "second": {
+                "question": ("How long does it take to see results after"
+                             " purchasing these services?"),
+                "answer": ("You'll notice enhanced engagement and"
+                           " visibility within hours, with full delivery"
+                           " based on your chosen package.")
+            },
+            "third": {
+                "question": ("Can I target specific demographics or"
+                             " regions for my purchased services?"),
+                "answer": ("Absolutely. We provide targeting options"
+                           " that let you customize your audience to"
+                           " match your goals.")
+            },
+            "fourth": {
+                "question": ("Are the followers, likes, and connections"
+                             " real people or bots?"),
+                "answer": ("We specialize in delivering real, active profiles"
+                           " to maintain authenticity and engagement.")
+            },
+            "fifth": {
+                "question": ("Do purchased likes and followers interact with"
+                             " my content on these platforms?"),
+                "answer": ("While they boost your numbers, engagement"
+                           " ultimately depends on the quality and appeal"
+                           " of your content.")
+            },
+            "sixth": {
+                "question": ("Is there a satisfaction guarantee or"
+                             " refund policy in case I'm not satisfied"
+                             " with the service?"),
+                "answer": ("We prioritize customer satisfaction and have a"
+                           " refund policy outlined in our terms and"
+                           " conditions to ensure your peace of mind.")
+            },
+        }
+        context['static_faqs'] = faqs
+        return context
 
 
 def user_signup(request):

@@ -1,0 +1,18 @@
+{% extends "blogs/base.html" %}
+{% load static %}
+
+{% block main_content %}
+
+<div class="container">
+    <section class="cta-section theme-bg-light py-5">
+        <div class="container text-center">
+            <h2 class="heading">{{blog.title}}</h2>
+            <div class="intro mb-3">{{blog.short_content}}</div>
+            <p class="card-text mb-2"><small class="text-muted">Last updated {{blog.updated_at}}</small></p>
+            <p class="card-text mb-3"><small class="text-muted">By - {{blog.author.first_name}} {{blog.author.last_name}}</small></p>    
+        </div>
+        <p class="card-text mt-5">{{blog.content|safe}}</p>
+    </section>
+</div>
+
+{% endblock main_content %}

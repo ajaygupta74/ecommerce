@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.shortcuts import redirect
 from project2 import settings
 from django.conf.urls.static import static
 from users.views import (
@@ -28,9 +27,9 @@ from users.views import (
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', lambda req: redirect('services/')),
+    path('', include("users.urls")),
     path('services/', include("services.urls")),
-    path('profile/', include("users.urls")),
+    path('blogs/', include("blogs.urls")),
     path('contactus/', contact_us, name='contact_us'),
     path('privacy-policy/', privacy_policy, name='privacy_policy'),
     path('refund-policy/', refund_policy, name='refund_policy'),

@@ -4,23 +4,24 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>Frequently Asked Questions</h2>
+                <h4 class="mb-3">Frequently Asked Questions</h4>
                 <div class="accordion" id="accordionExample">
                     {% for faq_item in faqs %}
-                        <div class="accordion-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <div class="accordion-item mb-3" style="border: 1px solid #e2dddd; border-radius: 4px;" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
                             <p class="accordion-header" id="heading{{forloop.counter0}}">
-                            <button style="font-weight: 500;" class="accordion-button 
+                            <button style="font-weight: 500;" class="accordion-button p-2
                                 {% ifequal 0 forloop.counter0 %} {% else %} collapsed {% endifequal %}" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#collapseheading{{forloop.counter0}}"
                                 aria-expanded="{% ifequal 0 forloop.counter0%} true {% else %} false {%endifequal%}"
-                                aria-controls="collapseheading{{forloop.counter0}}" aria-controls="collapseheading{{forloop.counter0}}">
+                                aria-controls="collapseheading{{forloop.counter0}}" aria-controls="collapseheading{{forloop.counter0}}"
+                                itemprop="name">
                                 {{ faq_item.question }}
                             </button>
                             </p>
                             <div id="collapseheading{{forloop.counter0}}" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"
-                            class="accordion-collapse collapse {% ifequal 0 forloop.counter0 %} show {% endifequal %}"
+                            class="accordion-collapse p-0 collapse {% ifequal 0 forloop.counter0 %} show {% endifequal %}"
                             aria-labelledby="heading{{forloop.counter0}}" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
+                                <div class="accordion-body p-2" itemprop="text">
                                     {{ faq_item.answer | safe }}
                                 </div>
                             </div>
@@ -36,19 +37,22 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h4> Satatic FAQ--Frequently Asked Questions</h4>
+                <h4 class="mb-3">Frequently Asked Questions</h4>
                 <div class="accordion" id="accordionExample">
                     {% for key, value in static_faqs.items %}
-                        <div class="accordion-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <div class="accordion-item mb-3" style="border: 1px solid #e2dddd; border-radius: 4px;" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
                             <p class="accordion-header" id="{{key}}">
-                            <button style="font-weight: 500;" class="accordion-button {% if key == 'first' %} {% else %} collapsed {% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{key}}" aria-expanded="{%if key == 'first'%} true {% else %} false {%endif%}" aria-controls="collapse{{key}}" aria-controls="collapse{{key}}">
+                            <button style="font-weight: 500;" class="accordion-button p-2 {% if key == 'first' %} {% else %} collapsed {% endif %}"
+                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{key}}"
+                            aria-expanded="{%if key == 'first'%} true {% else %} false {%endif%}" aria-controls="collapse{{key}}"
+                            aria-controls="collapse{{key}}" itemprop="name">
                                 {{ value.question }}
                             </button>
                             </p>
                             <div id="collapse{{key}}" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"
-                                class="accordion-collapse collapse {% if key == 'first' %} show {% endif %}" aria-labelledby="{{key}}"
+                                class="accordion-collapse p-0 collapse {% if key == 'first' %} show {% endif %}" aria-labelledby="{{key}}"
                                 data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
+                                <div class="accordion-body p-2" itemprop="text">
                                 {{ value.answer | safe }}
                             </div>
                             </div>

@@ -9,7 +9,6 @@ from services.views import (
 )
 
 service_router = SimpleRouter()
-service_router.register(r'', HomeView, basename='service_home')
 
 urlpatterns = [
     path('', HomeView.as_view(), name='service_home'),
@@ -18,8 +17,5 @@ urlpatterns = [
          ProductDetailView.as_view(),
          name='product_detail'),
     path('<slug:category_slug>/<slug:product_slug>/checkout/',
-         order_detail, name='order_detail'),
-    # path('confirm_order_payment/',
-    #      confirm_order_payment,
-    #      name="confirm_order_payment")
+         order_detail, name='order_detail')
 ]
